@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://earnest17150-png.github.io/sitemap.xml
