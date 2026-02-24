@@ -511,22 +511,27 @@ footer a:hover::after {
 }
 
 #hamburgerBtn span{
-transition: all .35s cubic-bezier(.4,0,.2,1);
+transition:.45s cubic-bezier(.68,-0.55,.27,1.55);
 }
 
 #hamburgerBtn.active span:nth-child(1){
-transform: translateY(9px) rotate(45deg);
+transform:translateY(8px) rotate(45deg);
+background:#2563eb;
 }
 #hamburgerBtn.active span:nth-child(2){
 opacity:0;
+transform:scale(0);
 }
 #hamburgerBtn.active span:nth-child(3){
-transform: translateY(-9px) rotate(-45deg);
+transform:translateY(-8px) rotate(-45deg);
+background:#2563eb;
 }
+
+
 #mobileMenu.show{
 transform: translateX(0);
 transition: transform .6s cubic-bezier(.22,1.15,.36,1);
-} 
+}
  #mobileMenu{
 will-change: transform;
 }
@@ -561,10 +566,203 @@ transition:.4s;
  #mobileMenu{
 backdrop-filter: blur(12px);
 }
+
+.menu-item{
+  padding:14px 14px;
+  border-radius:14px;
+  transition: all .25s ease;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.menu-item:hover{
+  background:#f1f5f9;
+  transform: translateX(6px);
+  color:#2563eb;
+  box-shadow:0 6px 16px rgba(0,0,0,.08);
+}
+.menu-icon{
+width:24px;
+height:24px;
+stroke:#64748b;
+stroke-width:2.2;
+transition:.3s;
+}
+
+
+.menu-item:hover .menu-icon{
+stroke:#2563eb;
+transform: scale(1.15) rotate(3deg);
+}
+.menu-item.active{
+background:#eff6ff;
+color:#2563eb;
+}
+.menu-item.active .menu-icon{
+stroke:#2563eb;
+}
+
+.wa-float{
+position:fixed;
+right:18px;
+bottom:18px;
+width:60px;
+height:60px;
+border-radius:18px;
+backdrop-filter: blur(14px);
+background:rgba(255,255,255,.25);
+box-shadow:0 10px 35px rgba(0,0,0,.18);
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:999;
+transition:.35s;
+}
+
+.wa-float svg{
+width:30px;
+}
+
+.wa-float:hover{
+transform:translateY(-6px) scale(1.05);
+box-shadow:0 15px 40px rgba(0,0,0,.25);
+}
+
+.parallax{
+transform: translateY(0);
+transition: transform .1s linear;
+}
+
+#loader{
+position:fixed;
+inset:0;
+background:#fff;
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:9999;
+transition:.6s;
+opacity:1;
+}
+
+.loader-logo{
+font-size:28px;
+font-weight:800;
+letter-spacing:2px;
+color:#2563eb;
+animation:pulse 1.2s infinite;
+}
+
+@keyframes pulse{
+50%{opacity:.4; transform:scale(.95)}
+}
+
+header.shrink{
+padding-top:6px;
+padding-bottom:6px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.menu-header{
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:6px;
+margin-bottom:25px;
+}
+
+.menu-header img{
+width:120px;
+}
+
+.menu-header p{
+font-size:13px;
+color:#64748b;
+}
+
+/* menu items upgrade */
+.menu-item{
+display:flex;
+align-items:center;
+gap:14px;
+padding:14px 16px;
+border-radius:14px;
+font-weight:600;
+transition:.3s;
+}
+
+.menu-item:hover{
+background:#f1f5f9;
+transform:translateX(6px);
+color:#2563eb;
+box-shadow:0 6px 16px rgba(0,0,0,.08);
+}
+
+/* icon */
+.menu-icon{
+width:22px;
+height:22px;
+stroke:#64748b;
+stroke-width:2;
+transition:.3s;
+}
+
+.menu-item:hover .menu-icon{
+stroke:#2563eb;
+transform:scale(1.15);
+}
+
+.menu-item{
+position:relative;
+}
+
+.menu-item::after{
+content:"";
+position:absolute;
+left:44px;
+right:10px;
+bottom:-4px;
+height:1px;
+background:linear-gradient(to right, transparent, #e5e7eb, transparent);
+opacity:0;
+transition:.3s;
+}
+
+.menu-item:hover::after{
+opacity:1;
+}
+
+.menu-item:hover .menu-icon{
+stroke:#2563eb;
+filter: drop-shadow(0 0 6px rgba(37,99,235,.35));
+transform:scale(1.15);
+}
+
+#loader{
+position:fixed;
+inset:0;
+background:#fff;
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:9999;
+transition:.6s;
+}
+
+#mobileMenu{
+transition: transform .55s cubic-bezier(.77,0,.18,1);
+}
+
 </style>
 </head>
 
 <body class="font-sans text-gray-800 overflow-x-hidden pb-16 md:pb-0">
+
+<div id="loader">
+<div class="loader-logo">EIT</div>
+</div>
+
 <!-- HEADER -->
 <header class="bg-white border-b sticky top-0 z-50">
 
@@ -616,38 +814,99 @@ backdrop-filter: blur(12px);
 </div>
 
 <!-- MOBILE MENU -->
+
 <div id="menuOverlay"
-class="fixed inset-0 bg-black/40 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300 z-40 md:hidden"
+class="fixed inset-0 bg-black/25 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300 z-40 md:hidden"
 onclick="toggleMenu()"></div>
  
- <div id="mobileMenu"
-class="fixed top-0 right-0 h-full w-[82%] max-w-sm bg-white shadow-2xl rounded-l-3xl z-50 px-8 pt-20 pb-8 flex flex-col justify-between transform translate-x-full transition-transform">
+<div id="mobileMenu"
+class="fixed right-3 top-3 bottom-3 h-auto
+w-[65%] max-w-[280px]
+bg-white/90 backdrop-blur-xl
+shadow-[0_20px_60px_rgba(0,0,0,0.18)]
+rounded-3xl
+z-50 px-6 pt-16 pb-8
+flex flex-col justify-between
+transform translate-x-full
+transition-transform duration-500 ease-out">
 
-<button onclick="toggleMenu()" class="absolute top-4 right-4 text-2xl">×</button>
 
-<div class="flex flex-col gap-1 text-[17px] font-medium mt-6 px-7">
-  <a href="#home" onclick="toggleMenu()" class="block py-2 w-full border-b border-gray-200 hover:text-blue-600 hover:translate-x-1 transition duration-200">Home</a>
-  <a href="#about" onclick="toggleMenu()" class="block py-2 w-full border-b border-gray-200 hover:text-blue-600 hover:translate-x-1 transition duration-200">About</a>
-  <a href="#products" onclick="toggleMenu()" class="block py-2 w-full border-b border-gray-200 hover:text-blue-600 hover:translate-x-1 transition duration-200">Products</a>
-  <a href="#services" onclick="toggleMenu()" class="block py-2 w-full border-b border-gray-200 hover:text-blue-600 hover:translate-x-1 transition duration-200">Services</a>
-  <a href="#why-us" onclick="toggleMenu()" class="block py-2 w-full border-b border-gray-200 hover:text-blue-600 hover:translate-x-1 transition duration-200">Why Us</a>
-  <a href="#contact" onclick="toggleMenu()" class="block py-2 w-full border-b border-gray-200 hover:text-blue-600 hover:translate-x-1 transition duration-200">Contact</a>
+
+<div class="menu-header">
+<img src="images/eit-logo.svg" alt="logo">
+<p>Earnest India Trading Company</p>
 </div>
-  
-<div class="mt-6 space-y-3 px-6">
+
+
+<button onclick="toggleMenu()"
+class="absolute top-5 right-5 w-9 h-9 rounded-full
+bg-gray-100 hover:bg-gray-200
+flex items-center justify-center text-xl transition">
+✕
+</button>
+
+<div class="flex flex-col gap-3 text-[16px] font-semibold mt-2 px-2">
+
+<a href="#home" onclick="toggleMenu()" class="menu-item">
+<svg class="menu-icon" fill="none" viewBox="0 0 24 24">
+<path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>
+</svg>
+Home
+</a>
+
+<a href="#about" onclick="toggleMenu()" class="menu-item">
+<svg class="menu-icon" fill="none" viewBox="0 0 24 24">
+<circle cx="12" cy="7" r="4"/>
+<path d="M5.5 21a6.5 6.5 0 0 1 13 0"/>
+</svg>
+About
+</a>
+
+<a href="#products" onclick="toggleMenu()" class="menu-item">
+<svg class="menu-icon" fill="none" viewBox="0 0 24 24">
+<rect x="3" y="4" width="18" height="16" rx="2"/>
+<path d="M3 10h18"/>
+</svg>
+Products
+</a>
+
+<a href="#services" onclick="toggleMenu()" class="menu-item">
+<svg class="menu-icon" fill="none" viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="3"/>
+<path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82"/>
+</svg>
+Services
+</a>
+
+<a href="#why-us" onclick="toggleMenu()" class="menu-item">
+<svg class="menu-icon" fill="none" viewBox="0 0 24 24">
+<path d="M12 17l-5 3 1.9-5.6L4 10l5.7-.5L12 4l2.3 5.5L20 10l-4.9 4.4L17 20z"/>
+</svg>
+Why Us
+</a>
+
+<a href="#contact" onclick="toggleMenu()" class="menu-item">
+<svg class="menu-icon" fill="none" viewBox="0 0 24 24">
+<path d="M22 16.92V21a2 2 0 0 1-2.18 2"/>
+<path d="M16 11a4 4 0 0 1-8 0"/>
+</svg>
+Contact
+</a>
+
+</div>
  
+<div class="mt-8 space-y-3">
+
 <a href="#contact"
-class="ripple bg-blue-600 text-white py-3 rounded-xl text-center w-full mt-6 font-semibold shadow-md">
+class="bg-blue-600 text-white py-3 rounded-xl text-center font-semibold shadow hover:shadow-lg transition">
 Get Quote
 </a>
 
 <a href="https://wa.me/919842217150"
-class="ripple bg-green-500 text-white py-3 rounded-xl text-center w-full font-semibold shadow-md flex items-center justify-center gap-2">
-<svg width="18" height="18" viewBox="0 0 24 24" fill="white">
-<path d="M20.52 3.48A11.94 11.94 0 0012.06 0C5.4 0 .02 5.38.02 12.04c0 2.12.55 4.2 1.6 6.04L0 24l6.12-1.6a11.98 11.98 0 005.94 1.52h.01c6.66 0 12.04-5.38 12.04-12.04 0-3.22-1.25-6.24-3.59-8.4z"/>
-</svg>
+class="bg-green-500 text-white py-3 rounded-xl text-center font-semibold shadow hover:shadow-lg transition">
 WhatsApp
 </a>
+
 </div>
 </div>
 
@@ -655,9 +914,12 @@ WhatsApp
 
 <!-- HERO -->
 <section id="home" class="relative bg-gradient-to-br from-blue-50 via-white to-blue-100 py-16 sm:py-20 md:py-28 overflow-hidden">
+
+
+
 <!-- Decorative Blur Background -->
-<div class="absolute -top-20 -left-20 w-72 h-72 bg-blue-400 opacity-20 blur-3xl rounded-full"></div>
-<div class="absolute -bottom-20 -right-20 w-72 h-72 bg-green-400 opacity-20 blur-3xl rounded-full"></div>
+<div class="parallax absolute -top-20 -left-20 w-72 h-72 bg-blue-400 opacity-20 blur-3xl rounded-full" data-speed="0.2"></div>
+<div class="parallax absolute -bottom-20 -right-20 w-72 h-72 bg-green-400 opacity-20 blur-3xl rounded-full" data-speed="0.35"></div>
 
 <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 px-6">
 
@@ -757,7 +1019,7 @@ a1.65 1.65 0 0 0-1.51 1z"/>
 <!-- Textile Equipment -->
 <div class="feature float">
 <div class="icon-box bg-gradient-to-br from-teal-500 to-cyan-500">
-<img loading="lazy" 
+<img loading="lazy"
   src="images/textile-machinery.svg"
   style="
     width:40px;
@@ -943,7 +1205,7 @@ a1.65 1.65 0 0 0-1.51 1z"/>
        class="ripple bg-green-500 text-white px-6 py-3 rounded-xl font-semibold transition hover:scale-105 w-full flex items-center justify-center gap-2">
 
       <svg width="22" height="22" viewBox="0 0 32 32" class="w-5 h-5 shrink-0">
-        
+       <circle cx="16" cy="16" r="16" fill="#16a34a"/>
         <path fill="#ffffff" d="M16 6C10.48 6 6 10.03 6 15c0 2.01.71 3.86 1.9 5.34L6 26l5.9-1.88A10.3 10.3 0 0 0 16 25c5.52 0 10-4.03 10-9s-4.48-10-10-10z"/>
         <path fill="#16a34a" d="M19.7 17.3c-.2-.1-1.1-.5-1.3-.6-.2-.1-.4-.1-.6.1-.2.3-.6.6-.7.8-.2.2-.3.2-.5.1-.3-.1-1-.4-1.9-1.2-.7-.6-1.2-1.3-1.3-1.6-.1-.2 0-.4.1-.5.1-.1.3-.3.4-.4.1-.1.2-.2.2-.4.1-.2 0-.3 0-.4 0-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 2s.8 2.3.9 2.5c.1.2 1.8 2.8 4.3 3.9.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.4-.1 1.4-.6 1.6-1.2.2-.6.2-1.1.1-1.2 0-.1-.2-.2-.4-.3z"/>
       </svg>
@@ -1374,25 +1636,25 @@ Ready to discuss your requirements? Reach out to us through any of these channel
   <!-- FULL NAME -->
   <div>
     <label class="block text-sm font-semibold mb-1">Full Name</label>
-    <input class="border p-3 rounded-lg w-full" id="name" placeholder="Your full name">
+   <input type="text" class="border p-3 rounded-lg w-full" id="name" placeholder="Your full name">
   </div>
 
   <!-- COMPANY -->
   <div>
     <label class="block text-sm font-semibold mb-1">Company Name</label>
-    <input class="border p-3 rounded-lg w-full" id="company" placeholder="Your company name">
+    <input type="text" class="border p-3 rounded-lg w-full" id="company" placeholder="Your company name">
   </div>
 
   <!-- EMAIL -->
   <div>
     <label class="block text-sm font-semibold mb-1">Email Address</label>
-    <input class="border p-3 rounded-lg w-full" id="email" placeholder="your@email.com">
+    <input type="email" class="border p-3 rounded-lg w-full" id="email" placeholder="your@email.com">
   </div>
 
   <!-- PHONE -->
   <div>
     <label class="block text-sm font-semibold mb-1">Phone Number</label>
-    <input class="border p-3 rounded-lg w-full" id="phone" placeholder="+91 XXXXX XXXXX">
+    <input type="tel" class="border p-3 rounded-lg w-full" id="phone" placeholder="+91 XXXXX XXXXX">
   </div>
 
   <!-- SUBJECT (FULL WIDTH) -->
@@ -1425,7 +1687,7 @@ Ready to discuss your requirements? Reach out to us through any of these channel
       Send Message
     </button>
 
-    <button 
+    <button
       type="button"
       onclick="sendWA()"
       class="wa-btn bg-green-500 text-white px-6 py-3 rounded-lg w-full flex items-center justify-center gap-2 transition hover:scale-105">
@@ -1455,8 +1717,8 @@ Ready to discuss your requirements? Reach out to us through any of these channel
 
     <!-- COLUMN 1 : LOGO -->
     <div>
-      
-  <img loading="lazy" 
+     
+  <img loading="lazy"
     src="images/image.svg"
     alt="Company Logo"
     style="width:240px; max-width:100%; height:auto;">
@@ -1522,53 +1784,53 @@ const data = {
   ],
 
 ball: [
-  { 
+  {
     name: "Deep Groove Ball Bearings",
     img: "images/Ball-Bearings/Deep-Groove-Ball-Bearing.jpeg"
   },
-  { 
+  {
     name: "Angular Contact Ball Bearings",
     img: "images/Ball-Bearings/Angular-contact-ball-bearings.jpeg"
   },
-  { 
+  {
     name: "Self Aligning Ball Bearings",
     img: "images/Ball-Bearings/self-aligning-ball-bearings.jpeg"
   },
-  { 
+  {
     name: "Thrust Ball Bearings",
     img: "images/Ball-Bearings/Thrust-ball-bearing.jpeg"
   },
-  { 
+  {
     name: "Cylindrical Roller Bearings",
     img: "images/Ball-Bearings/cylindrical-roller-bearing.jpeg"
   },
-  { 
+  {
     name: "Tapered Roller Bearings",
     img: "images/Ball-Bearings/tapered-roller-bearing.jpeg"
   },
-  { 
+  {
     name: "Spherical Roller Bearings",
     img: "images/Ball-Bearings/spherical-roller-bearing.jpeg"
   },
-  { 
+  {
     name: "Other Ball Bearings",
     img: "images/Ball-Bearings/Others.jpg"
   }
 
 ],  other: [
-  { 
+  {
     name: "Resilient Mount",
     img: "images/otherSpares/ResilientMount.jpg"
   },
-  { 
+  {
     name: "Aluminium Pulley",
     img: "images/otherSpares/AlumniumPulley.jpg"
   },
-  { 
+  {
     name: "Pulley Bearing",
     img: "images/otherSpares/PulleyBearing.jpg"
   },
-  { 
+  {
     name: "Others",
     img: "images/otherSpares/Others.jpg"
   }
@@ -1576,41 +1838,41 @@ ball: [
 
 
   used: [
-  { 
-    name: "Blowroom Machines", 
-    img: "images/Used-Machinery/Blowroom.png" 
+  {
+    name: "Blowroom Machines",
+    img: "images/Used-Machinery/Blowroom.png"
   },
- { 
-    name: "Carding Machines", 
-    img: "images/Used-Machinery/Carding-Machines.jpg" 
+ {
+    name: "Carding Machines",
+    img: "images/Used-Machinery/Carding-Machines.jpg"
   },
-  { 
-    name: "Drawframe Machines", 
-    img: "images/Used-Machinery/Drawframe.jpg" 
+  {
+    name: "Drawframe Machines",
+    img: "images/Used-Machinery/Drawframe.jpg"
   },
-  { 
-    name: "Simplex Machines", 
-    img: "images/Used-Machinery/Simplex.jpg" 
+  {
+    name: "Simplex Machines",
+    img: "images/Used-Machinery/Simplex.jpg"
   },
-  { 
-    name: "Ring Spinning Machines", 
-    img: "images/Used-Machinery/Ring-Spinning-Machines.jpg" 
+  {
+    name: "Ring Spinning Machines",
+    img: "images/Used-Machinery/Ring-Spinning-Machines.jpg"
   },
-  { 
-    name: "Open-End Machines", 
-    img: "images/Used-Machinery/Open-End-Machines.jpg" 
+  {
+    name: "Open-End Machines",
+    img: "images/Used-Machinery/Open-End-Machines.jpg"
   },
-  { 
-    name: "Winders Machines", 
-    img: "images/Used-Machinery/Winders.png" 
+  {
+    name: "Winders Machines",
+    img: "images/Used-Machinery/Winders.png"
   },
-  { 
-    name: "Weaving Looms Machines", 
-    img: "images/Used-Machinery/Looms.jpg" 
+  {
+    name: "Weaving Looms Machines",
+    img: "images/Used-Machinery/Looms.jpg"
   },
-  { 
-    name: "Others", 
-    img: "images/Used-Machinery/Others.png" 
+  {
+    name: "Others",
+    img: "images/Used-Machinery/Others.png"
   }
 ]
 };
@@ -1633,7 +1895,7 @@ setTimeout(() => {
   data[type].forEach(item => {
 
     box.innerHTML += `
-      <div 
+      <div
         class="stagger-item bg-white rounded-2xl shadow overflow-hidden relative group text-center cursor-pointer"
         onclick="${
           type === 'openend'
@@ -1648,7 +1910,7 @@ setTimeout(() => {
         <div class="relative">
 
           <img loading="lazy"
-            src="${item.img}" 
+            src="${item.img}"
             alt="${item.name}"
             class="w-full ${
               type === 'ball' ? 'h-56 object-contain p-4' :
@@ -1668,13 +1930,13 @@ setTimeout(() => {
               ? `
               <div class="absolute inset-0 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition duration-300 bg-black/40">
 
-                <button 
+                <button
                   onclick="event.stopPropagation(); enquireUsedMachine('${item.name}')"
                   class="bg-blue-600 text-white px-4 py-2 rounded-lg">
                   Enquire
                 </button>
 
-                <button 
+                <button
   onclick="event.stopPropagation(); whatsappUsedMachine('${item.name}')"
   class="bg-green-500 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition hover:scale-105">
 
@@ -1819,9 +2081,9 @@ function showMissingPopup(fields) {
   const box = document.getElementById("validationBox");
   const message = document.getElementById("validationMessage");
 
-  message.innerHTML = 
-    "Please fill the following fields:<br><br><strong>" + 
-    fields.join("<br>") + 
+  message.innerHTML =
+    "Please fill the following fields:<br><br><strong>" +
+    fields.join("<br>") +
     "</strong>";
 
   modal.classList.remove("opacity-0", "pointer-events-none");
@@ -1873,7 +2135,7 @@ function openBrand(brand) {
 
   Object.keys(items).forEach(name => {
     const img = document.getElementById("img-" + name);
-        
+       
     if (img) {
 
   img.classList.add("img-loading");
@@ -2433,7 +2695,7 @@ const materialLists = {
       "C533 U-D Rotor Cup",
       "C533 TR-D Rotor Cup",
       "C536 U-D Rotor Cup",
-      "C536 TR-D Rotor Cup" 	
+      "C536 TR-D Rotor Cup"
     ],
     "Rotor Bearing": [
       "T013 Rotor Bearing Upto 105,000 RPM",
@@ -2570,7 +2832,7 @@ Other: {
   "Deep Groove Ball Bearings": [
     "6000 - 6034 Series",
     "6200 - 6230 Series",
-    "6300 - 6321 Series",   
+    "6300 - 6321 Series",  
     "6403 - 6418 Series",
     "16002 - 16030 Series",
     "61800 - 61836 Series",
@@ -2792,6 +3054,31 @@ function toggleMenu(){
   overlay.classList.toggle("pointer-events-none");
 }
 
+let touchStartX = 0;
+
+document.addEventListener("touchstart",e=>{
+touchStartX = e.touches[0].clientX;
+});
+
+document.addEventListener("touchmove",e=>{
+let moveX = e.touches[0].clientX;
+
+if(touchStartX < 25 && moveX > touchStartX + 70){
+mobileMenu.classList.add("show");
+menuOverlay.classList.remove("opacity-0","pointer-events-none");
+}
+});
+
+
+
+
+mobileMenu.addEventListener("touchmove", e=>{
+let move = e.touches[0].clientX;
+if(move - startX > 70){
+toggleMenu();
+}
+})
+
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -2805,6 +3092,72 @@ document.querySelectorAll("section").forEach(section => {
   observer.observe(section);
 });
 
+document.querySelectorAll('.menu-item').forEach(link=>{
+link.addEventListener('click',function(){
+document.querySelectorAll('.menu-item').forEach(l=>l.classList.remove('active'))
+this.classList.add('active')
+})
+})
+
+window.addEventListener("scroll",()=>{
+document.querySelectorAll(".parallax").forEach(el=>{
+let speed = el.getAttribute("data-speed") || 0.25;
+el.style.transform = `translateY(${window.scrollY * speed}px)`
+})
+})
+
+window.addEventListener("load",()=>{
+setTimeout(()=>{
+loader.style.opacity="0";
+setTimeout(()=>loader.remove(),600)
+},600)
+})
+
+window.addEventListener("scroll",()=>{
+if(window.scrollY > 40){
+document.querySelector("header").classList.add("shrink")
+}else{
+document.querySelector("header").classList.remove("shrink")
+}
+})
+
+let startX = 0;
+const mobileMenu = document.getElementById("mobileMenu");
+const menuOverlay = document.getElementById("menuOverlay");
+
+document.addEventListener("touchstart",e=>{
+startX = e.touches[0].clientX;
+});
+
+document.addEventListener("touchmove",e=>{
+let move = e.touches[0].clientX;
+
+if(startX > 10 && move > startX + 70){
+mobileMenu.classList.add("show");
+menuOverlay.classList.remove("opacity-0","pointer-events-none");
+}
+});
+
+const sections = document.querySelectorAll("section");
+const navLinks = document.querySelectorAll(".menu-item");
+
+window.addEventListener("scroll", ()=>{
+let current = "";
+
+sections.forEach(sec=>{
+const top = window.scrollY;
+if(top >= sec.offsetTop - 200){
+current = sec.getAttribute("id");
+}
+});
+
+navLinks.forEach(link=>{
+link.classList.remove("active");
+if(link.getAttribute("href").includes(current)){
+link.classList.add("active");
+}
+});
+});
 
 </script>
 
@@ -2933,7 +3286,7 @@ document.querySelectorAll("section").forEach(section => {
 
 <!-- MISSING FIELD POPUP -->
 <!-- Premium Validation Modal -->
-<div id="validationModal" 
+<div id="validationModal"
      class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center opacity-0 pointer-events-none transition duration-300 z-50">
 
   <div class="bg-white rounded-2xl shadow-2xl p-8 w-[90%] max-w-md text-center transform scale-90 transition duration-300" id="validationBox">
@@ -2944,21 +3297,12 @@ document.querySelectorAll("section").forEach(section => {
 
     <p id="validationMessage" class="text-gray-600 mb-6"></p>
 
-    <button onclick="closeValidationModal()" 
+    <button onclick="closeValidationModal()"
             class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
       OK
     </button>
 
   </div>
-</div>
-
-<div class="fixed bottom-0 left-0 w-full bg-green-600 text-white py-3 flex justify-center md:hidden z-30">
-  <a href="https://wa.me/919842217150" class="flex items-center gap-2 font-semibold">
-    <svg width="20" height="20" viewBox="0 0 32 32">
-      <circle cx="16" cy="16" r="16" fill="#16a34a"/>
-    </svg>
-    Chat on WhatsApp
-  </a>
 </div>
 
 <button id="scrollTopBtn"
@@ -2981,26 +3325,35 @@ btn.classList.add("opacity-0","pointer-events-none");
 });
 
 btn.onclick = () => window.scrollTo({top:0, behavior:"smooth"});
-</script>         
-         
+</script>        
+
+<a href="https://wa.me/919842217150" target="_blank" class="wa-float">
+<svg viewBox="0 0 32 32">
+  <circle cx="16" cy="16" r="16" fill="#25D366"/>
+
+  <path fill="#ffffff"
+  d="M16 6C10.48 6 6 10.03 6 15c0 2.01.71 3.86 1.9 5.34L6 26l5.9-1.88A10.3 10.3 0 0 0 16 25c5.52 0 10-4.03 10-9s-4.48-10-10-10z"/>
+
+  <path fill="#25D366"
+  d="M19.7 17.3c-.2-.1-1.1-.5-1.3-.6-.2-.1-.4-.1-.6.1-.2.3-.6.6-.7.8-.2.2-.3.2-.5.1-.3-.1-1-.4-1.9-1.2-.7-.6-1.2-1.3-1.3-1.6-.1-.2 0-.4.1-.5.1-.1.3-.3.4-.4.1-.1.2-.2.2-.4.1-.2 0-.3 0-.4 0-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 2s.8 2.3.9 2.5c.1.2 1.8 2.8 4.3 3.9.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.4-.1 1.4-.6 1.6-1.2.2-.6.2-1.1.1-1.2 0-.1-.2-.2-.4-.3z"/>
+</svg>
+</a>
+ 
+
+<script>
+window.addEventListener("load",()=>{
+const loader = document.getElementById("loader");
+
+if (loader) {
+  setTimeout(() => {
+    loader.style.opacity = "0";
+    setTimeout(() => loader.remove(), 600);
+  }, 600);
+}
+})
+</script>
+
+
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
