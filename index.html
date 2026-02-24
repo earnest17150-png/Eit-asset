@@ -771,8 +771,25 @@ transition:.25s ease;
 .btn-icon{
  width:28px;
  height:28px;
+ flex-shrink:0;
 }
- 
+ label{
+display:block;
+margin-bottom:6px;
+font-weight:500;
+}
+ .input-icon{
+position:absolute;
+left:12px;
+top:50%;
+transform:translateY(-50%);
+width:18px;
+opacity:.6;
+}
+
+.input-box{
+padding-left:42px;
+}
 </style>
 </head>
 
@@ -917,7 +934,7 @@ class="w-[88%] flex items-center justify-center gap-2 bg-green-500 text-white py
 
  
 <a href="#contact"
-class="w-[88%] flex items-center justify-center gap-3 bg-blue-600 text-white py-3 px-4 rounded-xl font-semibold shadow hover:shadow-lg transition active:scale-95">
+class="w-[88%] flex items-center justify-center gap-3 bg-blue-600 text-white py-3 px-4 rounded-xl font-semibold shadow hover:shadow-lg transition active:scale-95 whitespace-nowrap">
 
 <img src="images/get-quote.png" class="btn-icon">
 
@@ -1645,40 +1662,40 @@ Ready to discuss your requirements? Reach out to us through any of these channel
 </div>
 
 <!-- RIGHT FORM -->
-<div class="bg-white p-8 rounded-2xl shadow">
+<div class="bg-white p-8 rounded-2xl shadow max-w-2xl mx-auto">
 
 <h3 class="text-2xl font-bold mb-6">Send us a Message</h3>
 
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
   <!-- FULL NAME -->
   <div>
     <label class="block text-sm font-semibold mb-1">Full Name</label>
-   <input type="text" class="border p-3 rounded-lg w-full" id="name" placeholder="Your full name">
+   <input type="text" class="border border-gray-300 p-3 rounded-lg w-full focus:border-blue-500 focus:outline-none" id="name" placeholder="Your full name">
   </div>
 
   <!-- COMPANY -->
   <div>
     <label class="block text-sm font-semibold mb-1">Company Name</label>
-    <input type="text" class="border p-3 rounded-lg w-full" id="company" placeholder="Your company name">
+    <input type="text" class="border border-gray-300 p-3 rounded-lg w-full focus:border-blue-500 focus:outline-none" id="company" placeholder="Your company name">
   </div>
 
   <!-- EMAIL -->
   <div>
     <label class="block text-sm font-semibold mb-1">Email Address</label>
-    <input type="email" class="border p-3 rounded-lg w-full" id="email" placeholder="your@email.com">
+    <input type="email" class="border border-gray-300 p-3 rounded-lg w-full focus:border-blue-500 focus:outline-none" id="email" placeholder="your@email.com">
   </div>
 
   <!-- PHONE -->
   <div>
     <label class="block text-sm font-semibold mb-1">Phone Number</label>
-    <input type="tel" class="border p-3 rounded-lg w-full" id="phone" placeholder="+91 XXXXX XXXXX">
+    <input type="tel" class="border border-gray-300 p-3 rounded-lg w-full focus:border-blue-500 focus:outline-none" id="phone" placeholder="+91 XXXXX XXXXX">
   </div>
 
   <!-- SUBJECT (FULL WIDTH) -->
-  <div class="col-span-2">
+  <div class="md:col-span-2">
     <label class="block text-sm font-semibold mb-1">Subject</label>
-    <select id="subject" class="border p-3 rounded-lg w-full">
+    <select id="subject" class="border border-gray-300 p-3 rounded-lg w-full focus:border-blue-500 focus:outline-none"
       <option value="">Select a subject</option>
       <option>Product Enquiry</option>
       <option>Spare Parts Request</option>
@@ -1689,9 +1706,9 @@ Ready to discuss your requirements? Reach out to us through any of these channel
   </div>
 
   <!-- MESSAGE (FULL WIDTH) -->
-  <div class="col-span-2">
+  <div class="md:col-span-2">
     <label class="block text-sm font-semibold mb-1">Message</label>
-    <textarea class="border p-3 rounded-lg w-full" id="message" rows="4"
+    <textarea class="border border-gray-300 p-3 rounded-lg w-full focus:border-blue-500 focus:outline-none" id="message" rows="4"
       placeholder="Tell us about your requirements..."></textarea>
   </div>
 
@@ -1710,7 +1727,7 @@ Ready to discuss your requirements? Reach out to us through any of these channel
       onclick="sendWA()"
       class="wa-btn bg-green-500 text-white px-6 py-3 rounded-lg w-full flex items-center justify-center gap-2 transition hover:scale-105">
 
-      <svg width="26" height="26" viewBox="0 0 32 32">
+      <svg width="22" height="22" class="shrink-0" viewBox="0 0 32 32">
         <circle cx="16" cy="16" r="16" fill="#16a34a"/>
         <path fill="#ffffff" d="M16 6C10.48 6 6 10.03 6 15c0 2.01.71 3.86 1.9 5.34L6 26l5.9-1.88A10.3 10.3 0 0 0 16 25c5.52 0 10-4.03 10-9s-4.48-10-10-10z"/>
         <path fill="#16a34a" d="M19.7 17.3c-.2-.1-1.1-.5-1.3-.6-.2-.1-.4-.1-.6.1-.2.3-.6.6-.7.8-.2.2-.3.2-.5.1-.3-.1-1-.4-1.9-1.2-.7-.6-1.2-1.3-1.3-1.6-.1-.2 0-.4.1-.5.1-.1.3-.3.4-.4.1-.1.2-.2.2-.4.1-.2 0-.3 0-.4 0-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 2s.8 2.3.9 2.5c.1.2 1.8 2.8 4.3 3.9.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.4-.1 1.4-.6 1.6-1.2.2-.6.2-1.1.1-1.2 0-.1-.2-.2-.4-.3z"/>
@@ -3385,6 +3402,7 @@ if (loader) {
 </body>
 
 </html>
+
 
 
 
