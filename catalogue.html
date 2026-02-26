@@ -1,95 +1,101 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>EIT Catalogues</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EIT Catalogue</title>
 
 <style>
 body{
 margin:0;
-font-family:Segoe UI, Arial;
-background:radial-gradient(circle at 50% 0%,#0b2a55,#020617 70%);
+font-family:Segoe UI;
+background:linear-gradient(#071c3f,#020617);
 color:white;
 text-align:center;
-padding:35px 20px;
+padding:30px 15px;
 }
 
-.logo{
-width:220px;
-margin-bottom:10px;
-}
+.logo{width:220px;margin-bottom:10px;}
 
 .title{
-font-size:36px;
+font-size:34px;
 font-weight:700;
-margin:10px 0;
+margin:15px 0 5px;
 }
 
-.subtitle{
-opacity:.9;
-margin-bottom:18px;
-}
+.subtitle{opacity:.9;margin-bottom:15px;}
 
 .pill{
 display:inline-block;
-padding:10px 18px;
+background:#0b254f;
+padding:10px 20px;
 border-radius:30px;
-background:rgba(255,255,255,.08);
-margin:10px 0 25px;
+margin-bottom:25px;
 font-size:14px;
 }
 
 .btn{
-display:block;
-max-width:340px;
-margin:18px auto;
-padding:18px;
-border-radius:14px;
+display:flex;
+align-items:center;
+justify-content:space-between;
 background:linear-gradient(90deg,#16a34a,#22c55e);
-text-decoration:none;
+max-width:340px;
+margin:16px auto;
+padding:18px 20px;
+border-radius:16px;
 color:white;
+text-decoration:none;
 font-weight:700;
-font-size:18px;
-box-shadow:0 10px 25px rgba(0,0,0,.4);
+box-shadow:0 10px 25px rgba(0,0,0,.5);
 }
 
-.desc{
-opacity:.8;
-margin-top:-8px;
-margin-bottom:15px;
+.btn img{width:26px;margin-right:12px;}
+
+.desc{opacity:.85;margin-top:-8px;margin-bottom:15px;}
+
+.section-title{
+font-size:24px;
+margin:30px 0 15px;
 }
 
 .features{
 display:grid;
 grid-template-columns:repeat(2,1fr);
-gap:14px;
+gap:15px;
 max-width:360px;
-margin:28px auto;
+margin:auto;
 }
 
 .card{
-background:rgba(255,255,255,.05);
+background:#0b254f;
 padding:18px;
-border-radius:12px;
-font-size:14px;
+border-radius:14px;
+}
+
+.card img{width:28px;margin-bottom:6px;}
+
+.stats{
+margin:30px 0;
+font-weight:600;
 }
 
 .whatsapp{
-display:block;
-max-width:340px;
-margin:28px auto;
-padding:16px;
-background:#25D366;
-border-radius:12px;
-text-decoration:none;
-color:white;
-font-weight:700;
+background:white;
+color:#0f172a;
+padding:20px;
+border-radius:18px;
+max-width:360px;
+margin:25px auto;
 }
 
-.footer{
-margin-top:20px;
-opacity:.7;
-font-size:13px;
+.cta{
+background:#16a34a;
+padding:14px;
+border-radius:12px;
+color:white;
+text-decoration:none;
+display:block;
+margin-top:10px;
+font-weight:700;
 }
 </style>
 </head>
@@ -99,38 +105,36 @@ font-size:13px;
 <img src="images/image.svg" class="logo">
 
 <div class="title">Select Catalogue</div>
+<div class="subtitle">Explore Textile Machinery Spares & Ball Bearings</div>
 
-<div class="subtitle">
-Explore Our <b style="color:#facc15;">Textile Machinery Spares & Solutions</b>
-</div>
-
-<div class="pill">
-Quality Products • Ready Stock • Custom Solutions
-</div>
+<div class="pill">Quality Products • Ready Stock • Custom Solutions</div>
 
 <a href="catalogue/Ball_Bearing_Catalogue.pdf" class="btn">
-Catalogue 1
+<div><img src="images/catalogue1.png">Catalogue 1</div>
+<span>›</span>
 </a>
-<div class="desc">Bearings • Rotor Completes • OE Spares</div>
+<div class="desc">All Type of Ball Bearings</div>
 
 <a href="catalogue/Textile_Spares_catalogue_L.pdf" class="btn">
-Catalogue 2
+<div><img src="images/catalogue2.png">Catalogue 2</div>
+<span>›</span>
 </a>
-<div class="desc">Reconditioning • Installations • Accessories</div>
+<div class="desc">OE Spares • Other Textile Spares</div>
+
+<div class="section-title">Why Choose EIT?</div>
 
 <div class="features">
-<div class="card">30+ Years Experience</div>
-<div class="card">Ready Stock</div>
-<div class="card">Pan India Delivery</div>
-<div class="card">Technical Support</div>
+<div class="card"><img src="images/exp.png"><br>30+ Years Experience</div>
+<div class="card"><img src="images/stock.png"><br>Ready Stock</div>
+<div class="card"><img src="images/delivery.png"><br>Pan India Delivery</div>
+<div class="card"><img src="images/support.png"><br>Technical Support</div>
 </div>
 
-<a href="https://wa.me/919894016711" class="whatsapp">
-Chat With Us Now
-</a>
+<div class="stats">5000+ Products • 100+ Clients • 25+ States</div>
 
-<div class="footer">
-Earnest India Trading Company
+<div class="whatsapp">
+Have a Requirement?<br>
+<a href="https://wa.me/919894016711" class="cta">Chat With Us Now</a>
 </div>
 
 </body>
