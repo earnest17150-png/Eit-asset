@@ -8,10 +8,10 @@
 body{
 margin:0;
 font-family:Segoe UI, Arial;
-background: radial-gradient(circle at top,#0b1c3d,#020617);
+background:radial-gradient(circle at 50% 0%,#0b2a55,#020617 70%);
 color:white;
 text-align:center;
-padding:30px 20px;
+padding:35px 20px;
 }
 
 .logo{
@@ -19,46 +19,43 @@ width:220px;
 margin-bottom:10px;
 }
 
-.trust{
-color:#86efac;
-font-size:14px;
-margin:8px 0;
-}
-
-.heading{
-font-size:34px;
+.title{
+font-size:36px;
 font-weight:700;
-margin:10px 0 5px;
+margin:10px 0;
 }
 
-.sub{
-opacity:.85;
-margin-bottom:25px;
+.subtitle{
+opacity:.9;
+margin-bottom:18px;
+}
+
+.pill{
+display:inline-block;
+padding:10px 18px;
+border-radius:30px;
+background:rgba(255,255,255,.08);
+margin:10px 0 25px;
+font-size:14px;
 }
 
 .btn{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin:16px auto;
-padding:18px 22px;
-max-width:320px;
-background:linear-gradient(90deg,#16a34a,#22c55e);
+display:block;
+max-width:340px;
+margin:18px auto;
+padding:18px;
 border-radius:14px;
+background:linear-gradient(90deg,#16a34a,#22c55e);
 text-decoration:none;
 color:white;
-font-weight:600;
-box-shadow:0 8px 22px rgba(0,0,0,.4);
-}
-
-.btn:hover{
-transform:translateY(-2px);
+font-weight:700;
+font-size:18px;
+box-shadow:0 10px 25px rgba(0,0,0,.4);
 }
 
 .desc{
-font-size:14px;
 opacity:.8;
-margin-top:-10px;
+margin-top:-8px;
 margin-bottom:15px;
 }
 
@@ -67,11 +64,11 @@ display:grid;
 grid-template-columns:repeat(2,1fr);
 gap:14px;
 max-width:360px;
-margin:30px auto;
+margin:28px auto;
 }
 
 .card{
-background:rgba(255,255,255,.06);
+background:rgba(255,255,255,.05);
 padding:18px;
 border-radius:12px;
 font-size:14px;
@@ -79,20 +76,20 @@ font-size:14px;
 
 .whatsapp{
 display:block;
-margin:30px auto 10px;
+max-width:340px;
+margin:28px auto;
 padding:16px;
-max-width:320px;
 background:#25D366;
 border-radius:12px;
 text-decoration:none;
 color:white;
-font-weight:600;
+font-weight:700;
 }
 
 .footer{
-margin-top:25px;
-font-size:13px;
+margin-top:20px;
 opacity:.7;
+font-size:13px;
 }
 </style>
 </head>
@@ -101,18 +98,23 @@ opacity:.7;
 
 <img src="images/image.svg" class="logo">
 
-<div class="trust">● Trusted Since 1990</div>
+<div class="title">Select Catalogue</div>
 
-<div class="heading">Select Catalogue</div>
-<div class="sub">Explore Our Textile Machinery Spares & Solutions</div>
+<div class="subtitle">
+Explore Our <b style="color:#facc15;">Textile Machinery Spares & Solutions</b>
+</div>
+
+<div class="pill">
+Quality Products • Ready Stock • Custom Solutions
+</div>
 
 <a href="catalogue/Ball_Bearing_Catalogue.pdf" class="btn">
-Ball Bearing Catalogue ➜
+Catalogue 1
 </a>
 <div class="desc">Bearings • Rotor Completes • OE Spares</div>
 
 <a href="catalogue/Textile_Spares_catalogue_L.pdf" class="btn">
-Textile Spares Catalogue ➜
+Catalogue 2
 </a>
 <div class="desc">Reconditioning • Installations • Accessories</div>
 
@@ -124,7 +126,7 @@ Textile Spares Catalogue ➜
 </div>
 
 <a href="https://wa.me/919894016711" class="whatsapp">
-Chat With Us On WhatsApp
+Chat With Us Now
 </a>
 
 <div class="footer">
