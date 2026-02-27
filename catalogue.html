@@ -259,6 +259,43 @@ width:24px;
 height:24px;
 object-fit:contain;
 }
+.btn-left img{
+width:24px;
+height:24px;
+object-fit:contain;
+}
+
+/* ⭐ glitter line */
+.glitter-line{
+width:160px;
+height:2px;
+margin:14px auto;
+background:linear-gradient(90deg,
+transparent,
+#60a5fa,
+#38bdf8,
+#60a5fa,
+transparent);
+position:relative;
+overflow:hidden;
+border-radius:2px;
+}
+
+.glitter-line::after{
+content:"";
+position:absolute;
+top:0;
+left:-40%;
+width:40%;
+height:100%;
+background:linear-gradient(90deg,transparent,white,transparent);
+animation:shine 2.5s infinite;
+}
+
+@keyframes shine{
+0%{left:-40%;}
+100%{left:140%;}
+}
   
 </style>
 </head>
@@ -268,6 +305,7 @@ object-fit:contain;
 <img src="images/image.svg" class="logo">
 
 <div class="title">Select Catalogue</div>
+<div class="glitter-line"></div>
 <div class="subtitle">Explore Textile Machinery Spares & Ball Bearings</div>
 
 <div class="pill">Quality Products • Ready Stock • Custom Solutions</div>
@@ -280,6 +318,7 @@ Catalogue 1
 <span>›</span>
 </a>
 <div class="desc">All Type of Ball Bearings</div>
+<div class="glitter-line"></div>
 
 <a href="catalogue/Textile_Spares_catalogue_L.pdf" class="btn">
 <div class="btn-left">
@@ -291,6 +330,7 @@ Catalogue 2
 <div class="desc">OE Spares • Other Textile Spares</div>
 
 <div class="section-title">Why Choose EIT?</div>
+<div class="glitter-line"></div>
 
 <div class="features">
 <div class="card"><img src="images/reliable.png"><br>30+ Years Experience</div>
