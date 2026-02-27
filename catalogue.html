@@ -322,17 +322,6 @@ overflow:hidden;
 border-radius:2px;
 }
 
-.glitter-line::after{
-content:"";
-position:absolute;
-top:0;
-left:-40%;
-width:40%;
-height:100%;
-background:linear-gradient(90deg,transparent,white,transparent);
-animation:shine 2.5s infinite;
-}
-
 @keyframes shine{
 0%{left:-40%;}
 100%{left:140%;}
@@ -432,39 +421,7 @@ animation:sideGlow 2.5s infinite;
 50%{opacity:1;}
 100%{opacity:.4;}
 }
-.desc-line{
-position:relative;
-text-align:center;
-margin-top:-6px;
-margin-bottom:18px;
-opacity:.9;
-font-size:14px;
-}
 
-/* ⭐ glowing underline */
-.desc-line::after{
-content:"";
-display:block;
-margin:8px auto 0;
-width:120px;
-height:2px;
-background:linear-gradient(90deg,
-transparent,
-#60a5fa,
-#38bdf8,
-white,
-#38bdf8,
-#60a5fa,
-transparent);
-border-radius:2px;
-animation:descGlow 2.8s infinite;
-}
-
-@keyframes descGlow{
-0%{opacity:.4;transform:scaleX(.85);}
-50%{opacity:1;transform:scaleX(1);}
-100%{opacity:.4;transform:scaleX(.85);}
-}
 </style>
 </head>
 
@@ -502,7 +459,6 @@ Catalogue 2
 <div class="heading-line">
    <span>Why Choose EIT?</span>
 </div>
-<div class="glitter-line"></div>
 
 <div class="features">
 <div class="card"><img src="images/reliable.png"><br>30+ Years Experience</div>
