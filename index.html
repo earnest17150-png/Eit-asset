@@ -1537,47 +1537,42 @@ a1.65 1.65 0 0 0-1.51 1z"/>
 
   <!-- SCROLL CONTAINER -->
 <div class="relative">
-<div id="scrollContainer" class="w-full overflow-hidden">
 
-<div id="scrollTrack" class="flex gap-6 w-max">
-
- </div>
-</div>
-
+  <div id="scrollContainer" class="w-full overflow-hidden">
+    <div id="scrollTrack" class="flex gap-6 w-max"></div>
   </div>
 
-
   <!-- LEFT BUTTON -->
-<button onclick="scrollLeftBtn()" 
-class="absolute left-3 top-1/2 -translate-y-1/2 z-10 
-w-10 h-10 flex items-center justify-center
-rounded-full backdrop-blur-md bg-white/30 border border-white/40
-shadow-lg hover:scale-110 hover:bg-white/50 transition">
+  <button onclick="scrollLeftBtn()" 
+  class="absolute left-3 top-1/2 -translate-y-1/2 z-10 
+  w-10 h-10 flex items-center justify-center
+  rounded-full backdrop-blur-md bg-white/30 border border-white/40
+  shadow-lg hover:scale-110 hover:bg-white/50 transition">
 
-  <svg xmlns="http://www.w3.org/2000/svg" 
-       class="w-5 h-5 text-gray-800" 
-       fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-  </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" 
+         class="w-5 h-5 text-gray-800" 
+         fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+    </svg>
 
-</button>
+  </button>
 
-<!-- RIGHT GLASS ARROW -->
-<button onclick="scrollRightBtn()" 
-class="absolute right-3 top-1/2 -translate-y-1/2 z-10 
-w-10 h-10 flex items-center justify-center
-rounded-full backdrop-blur-md bg-white/30 border border-white/40
-shadow-lg hover:scale-110 hover:bg-white/50 transition">
+  <!-- RIGHT BUTTON -->
+  <button onclick="scrollRightBtn()" 
+  class="absolute right-3 top-1/2 -translate-y-1/2 z-10 
+  w-10 h-10 flex items-center justify-center
+  rounded-full backdrop-blur-md bg-white/30 border border-white/40
+  shadow-lg hover:scale-110 hover:bg-white/50 transition">
 
-  <svg xmlns="http://www.w3.org/2000/svg" 
-       class="w-5 h-5 text-gray-800" 
-       fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-  </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" 
+         class="w-5 h-5 text-gray-800" 
+         fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+    </svg>
 
-</button>
+  </button>
+
 </div>
-
 
 
 
@@ -3915,9 +3910,13 @@ if (loader) {
     class="absolute top-6 right-6 text-white text-3xl">&times;</button>
 
   <!-- IMAGE -->
+  <div class="overflow-hidden w-full h-full flex items-center justify-center">
+
   <img id="modalImgPreview"
-     onclick="event.stopPropagation()"
-     class="max-w-[90%] max-h-[90%] rounded-xl shadow-lg object-contain">
+       onclick="event.stopPropagation()"
+       class="max-w-[90%] max-h-[90%] rounded-xl shadow-lg object-contain transition-transform duration-200 cursor-zoom-in">
+
+</div>
 
 </div>
 
@@ -4154,12 +4153,12 @@ function openGalleryModal(){
   for(let i = 1; i <= 35; i++){
 
     grid.innerHTML += `
-      <div class="cursor-pointer border rounded-xl p-4 hover:shadow-lg transition text-center">
+      <div class="cursor-pointer border rounded-xl p-5 hover:shadow-xl transition text-center w-full">
 
         <img src="images/card/product${i}.jpg"
              data-title="${productNames[i-1]}"
              onclick="openCard(this)"
-             class="w-full h-28 sm:h-32 md:h-36 object-cover rounded-xl mb-3">
+             class="w-full h-48 md:h-64 object-contain bg-white rounded-xl mb-3">
 
         <p class="font-semibold">${productNames[i-1]}</p>
 
@@ -4244,6 +4243,97 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 });
+
+let scale = 1;
+let isDragging = false;
+let startX, startY;
+let currentX = 0, currentY = 0;
+
+const img = document.getElementById("modalImgPreview");
+
+// SCROLL ZOOM (desktop)
+img.addEventListener("wheel", (e) => {
+  e.preventDefault();
+
+  if (e.deltaY < 0) {
+    scale += 0.2;
+  } else {
+    scale -= 0.2;
+  }
+
+  scale = Math.min(Math.max(1, scale), 5);
+
+  updateTransform();
+});
+
+// DRAG MOVE
+img.addEventListener("mousedown", (e) => {
+  isDragging = true;
+  startX = e.clientX - currentX;
+  startY = e.clientY - currentY;
+  img.style.cursor = "grabbing";
+});
+
+window.addEventListener("mousemove", (e) => {
+  if (!isDragging) return;
+
+  currentX = e.clientX - startX;
+  currentY = e.clientY - startY;
+
+  updateTransform();
+});
+
+window.addEventListener("mouseup", () => {
+  isDragging = false;
+  img.style.cursor = "zoom-in";
+});
+
+// TOUCH PINCH ZOOM (mobile)
+let initialDistance = 0;
+
+img.addEventListener("touchstart", (e) => {
+  if (e.touches.length === 2) {
+    initialDistance = getDistance(e.touches);
+  }
+});
+
+img.addEventListener("touchmove", (e) => {
+  if (e.touches.length === 2) {
+    let newDistance = getDistance(e.touches);
+
+    if (initialDistance) {
+      scale += (newDistance - initialDistance) * 0.005;
+      scale = Math.min(Math.max(1, scale), 5);
+      updateTransform();
+    }
+
+    initialDistance = newDistance;
+  }
+});
+
+function getDistance(touches) {
+  let dx = touches[0].clientX - touches[1].clientX;
+  let dy = touches[0].clientY - touches[1].clientY;
+  return Math.sqrt(dx * dx + dy * dy);
+}
+
+function updateTransform() {
+  img.style.transform = `translate(${currentX}px, ${currentY}px) scale(${scale})`;
+}
+
+// RESET WHEN CLOSED
+function closeImageModal() {
+  const modal = document.getElementById("imageModal");
+
+  modal.classList.remove("flex");
+  modal.classList.add("hidden");
+
+  scale = 1;
+  currentX = 0;
+  currentY = 0;
+  img.style.transform = "translate(0,0) scale(1)";
+}
+
 </script>
 
 </body>
