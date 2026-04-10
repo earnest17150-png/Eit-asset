@@ -3945,19 +3945,31 @@ if (loader) {
 
 <script>
 function openImageModal(src) {
+
   const modal = document.getElementById("imageModal");
-  const img = document.getElementById("modalImg");
+  const img = document.getElementById("modalImgPreview");
 
   img.src = src;
+
   modal.classList.remove("hidden");
   modal.classList.add("flex");
+
+  setTimeout(initZoom, 100); // 🔥 IMPORTANT
 }
 
 function closeImageModal() {
+
   const modal = document.getElementById("imageModal");
+  const img = document.getElementById("modalImgPreview");
 
   modal.classList.remove("flex");
   modal.classList.add("hidden");
+
+  scale = 1;
+  currentX = 0;
+  currentY = 0;
+
+  img.style.transform = "translate(0,0) scale(1)";
 }
 
 
@@ -4191,7 +4203,7 @@ for(let i = 1; i <= 35; i++){
            onclick="openCard(this)"
            class="cursor-pointer w-full h-40 object-contain bg-white rounded-lg mb-3">
 
-      <h4 class="text-sm font-semibold text-center">
+      <h4 class="text-sm font-semibold text-center leading-tight line-clamp-2 h-[40px] overflow-hidden">
         ${productNames[i-1]}
       </h4>
 
@@ -4234,7 +4246,7 @@ document.addEventListener("DOMContentLoaded", () => {
              onclick="openCard(this)"
              class="cursor-pointer w-full h-40 object-cover rounded-lg mb-3">
 
-        <h4 class="text-sm font-semibold text-center">
+        <h4 class="text-sm font-semibold text-center leading-tight line-clamp-2 h-[40px] overflow-hidden">
           ${productNames[i-1]}
         </h4>
 
@@ -4332,6 +4344,81 @@ function closeImageModal() {
   currentX = 0;
   currentY = 0;
   img.style.transform = "translate(0,0) scale(1)";
+}
+
+let scale = 1;
+let currentX = 0;
+let currentY = 0;
+let isDragging = false;
+let startX, startY;
+
+function initZoom() {
+
+  const img = document.getElementById("modalImgPreview");
+
+  if (!img) return;
+
+  // SCROLL ZOOM
+  img.onwheel = (e) => {
+    e.preventDefault();
+
+    scale += e.deltaY < 0 ? 0.2 : -0.2;
+    scale = Math.min(Math.max(1, scale), 5);
+
+    updateTransform(img);
+  };
+
+  // DRAG
+  img.onmousedown = (e) => {
+    isDragging = true;
+    startX = e.clientX - currentX;
+    startY = e.clientY - currentY;
+  };
+
+  window.onmousemove = (e) => {
+    if (!isDragging) return;
+
+    currentX = e.clientX - startX;
+    currentY = e.clientY - startY;
+
+    updateTransform(img);
+  };
+
+  window.onmouseup = () => {
+    isDragging = false;
+  };
+
+  // TOUCH PINCH
+  let initialDistance = 0;
+
+  img.ontouchstart = (e) => {
+    if (e.touches.length === 2) {
+      initialDistance = getDistance(e.touches);
+    }
+  };
+
+  img.ontouchmove = (e) => {
+    if (e.touches.length === 2) {
+      let newDistance = getDistance(e.touches);
+
+      scale += (newDistance - initialDistance) * 0.005;
+      scale = Math.min(Math.max(1, scale), 5);
+
+      updateTransform(img);
+
+      initialDistance = newDistance;
+    }
+  };
+}
+
+function updateTransform(img) {
+  img.style.transform = `translate(${currentX}px, ${currentY}px) scale(${scale})`;
+}
+
+function getDistance(touches) {
+  let dx = touches[0].clientX - touches[1].clientX;
+  let dy = touches[0].clientY - touches[1].clientY;
+  return Math.sqrt(dx * dx + dy * dy);
 }
 
 </script>
