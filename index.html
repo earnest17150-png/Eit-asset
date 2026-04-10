@@ -818,6 +818,250 @@ pointer-events:none;
 transform:scale(.8);
 }
 
+#scrollContainer {
+  scroll-behavior: auto;
+}
+
+#scrollContainer::before,
+#scrollContainer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 60px;
+  height: 100%;
+  z-index: 5;
+  pointer-events: none;
+}
+
+#scrollContainer::before {
+  left: 0;
+  background: linear-gradient(to right, white, transparent);
+}
+
+#scrollContainer::after {
+  right: 0;
+  background: linear-gradient(to left, white, transparent);
+}
+.glass-btn{
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.3);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+}
+
+.glass-btn:hover{
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+}
+
+.glass-btn:active{
+  transform: scale(0.95);
+}
+
+.glass-btn{
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.25);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* 🔥 NEON GLOW COLORS */
+.glass-green{
+  background: linear-gradient(135deg, #22c55e, #16a34a); /* 🔥 INSIDE COLOR */
+  box-shadow:
+    0 0 12px rgba(34,197,94,0.6),
+    0 0 30px rgba(34,197,94,0.4);
+}
+
+.glass-blue{
+  background: linear-gradient(135deg, #3b82f6, #2563eb); /* 🔥 INSIDE COLOR */
+  box-shadow:
+    0 0 12px rgba(37,99,235,0.6),
+    0 0 30px rgba(37,99,235,0.4);
+}
+
+.glass-white{
+  box-shadow:
+    0 0 10px rgba(255,255,255,0.6),
+    0 0 25px rgba(255,255,255,0.4);
+}
+
+/* hover glow boost */
+.glass-btn:hover{
+  transform: translateY(-3px) scale(1.05);
+}
+
+/* 🔥 LIGHT REFLECTION EFFECT */
+.glass-btn::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(
+    120deg,
+    rgba(255,255,255,0.4),
+    rgba(255,255,255,0.05),
+    transparent
+  );
+  opacity:0.6;
+  pointer-events:none;
+}
+
+.glass-btn:hover{
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+}
+
+/* GLASS BASE */
+.glass-btn {
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  transition: all 0.3s ease;
+}
+
+/* GREEN NEON */
+.glass-green {
+  box-shadow:
+    0 0 10px rgba(34,197,94,0.7),
+    0 0 20px rgba(34,197,94,0.5),
+    inset 0 0 10px rgba(255,255,255,0.1);
+}
+
+/* BLUE NEON */
+.glass-blue {
+  box-shadow:
+    0 0 10px rgba(59,130,246,0.7),
+    0 0 20px rgba(59,130,246,0.5),
+    inset 0 0 10px rgba(255,255,255,0.1);
+}
+
+/* HOVER EFFECT */
+.glass-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+}
+
+/* NORMAL TEXT GLOW = same as font color */
+.text-glow-green {
+  color: #4ade80;
+  text-shadow: 0 0 6px rgba(34,197,94,0.6);
+}
+
+.text-glow-blue {
+  color: #60a5fa;
+  text-shadow: 0 0 6px rgba(59,130,246,0.6);
+}
+
+.text-glow-white {
+  color: #ffffff;
+  text-shadow: 0 0 6px rgba(255,255,255,0.6);
+}
+
+/* 🔥 HOVER = brighter glow */
+.glass-btn:hover .text-glow-green {
+  text-shadow:
+    0 0 10px rgba(34,197,94,1),
+    0 0 20px rgba(34,197,94,0.9);
+}
+
+.glass-btn:hover .text-glow-blue {
+  text-shadow:
+    0 0 10px rgba(59,130,246,1),
+    0 0 20px rgba(59,130,246,0.9);
+}
+
+.glass-btn:hover .text-glow-white {
+  text-shadow:
+    0 0 10px rgba(255,255,255,1),
+    0 0 20px rgba(255,255,255,0.9);
+}
+
+/* smooth effect */
+.text-glow-green,
+.text-glow-blue,
+.text-glow-white {
+  transition: text-shadow 0.25s ease;
+}
+
+
+/* 🔥 BUTTON GLOW BOOST */
+.glass-btn:hover {
+  transform: translateY(-2px) scale(1.04);
+}
+
+/* GREEN BUTTON HOVER */
+.glass-green:hover {
+  box-shadow:
+    0 0 20px rgba(34,197,94,0.9),
+    0 0 40px rgba(34,197,94,0.7),
+    0 0 70px rgba(34,197,94,0.5);
+}
+
+/* BLUE BUTTON HOVER */
+.glass-blue:hover {
+  box-shadow:
+    0 0 20px rgba(59,130,246,0.9),
+    0 0 40px rgba(59,130,246,0.7),
+    0 0 70px rgba(59,130,246,0.5);
+}
+
+/* WHITE BUTTON HOVER */
+.glass-white:hover {
+  box-shadow:
+    0 0 20px rgba(255,255,255,0.9),
+    0 0 40px rgba(255,255,255,0.7),
+    0 0 70px rgba(255,255,255,0.5);
+}
+
+.glass-btn:hover .text-glow-green {
+  text-shadow: 0 0 15px rgba(34,197,94,1);
+}
+
+.glass-btn:hover .text-glow-blue {
+  text-shadow: 0 0 15px rgba(59,130,246,1);
+}
+
+.glass-btn:hover .text-glow-white {
+  text-shadow: 0 0 15px rgba(255,255,255,1);
+}
+
+.glass-btn,
+.text-glow-green,
+.text-glow-blue,
+.text-glow-white {
+  transition: all 0.3s ease;
+}
+
+body.no-scroll {
+  overflow: hidden;
+}
+
+/* 🔵 BLUE SCROLLBAR */
+.brand-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.brand-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.brand-scroll::-webkit-scrollbar-thumb {
+  background: #3b82f6; /* blue */
+  border-radius: 10px;
+}
+
+.brand-scroll::-webkit-scrollbar-thumb:hover {
+  background: #2563eb; /* darker blue */
+}
+
+#showcase,
+#enquiry {
+  scroll-margin-top: 120px;
+}
+
 
 </style>
 </head>
@@ -850,7 +1094,8 @@ transform:scale(.8);
 <nav class="hidden md:flex flex-wrap gap-4 text-sm">
 <a href="#home">Home</a>
 <a href="#about">About</a>
-<a href="#products">Products</a>
+<a href="#showcase">Products</a>
+<a href="#enquiry">Enquiry</a>
 <a href="#services">Services</a>
 <a href="#why-us">Why Us</a>
 <a href="#contact">Contact</a>
@@ -859,7 +1104,7 @@ transform:scale(.8);
 <div class="hidden md:flex items-center gap-2">
   
   <a href="https://wa.me/919842217150"
-     class="ripple flex items-center justify-center px-5 h-11 whitespace-nowrap bg-green-500 text-white rounded-xl font-semibold shadow-md hover:shadow-xl transition">
+     class="glass-btn glass-green ripple flex items-center justify-center px-5 h-11 bg-green-500/80 text-white rounded-xl font-semibold">
 <svg width="26" height="26" viewBox="0 0 32 32"class="shrink-0">
   <!-- GREEN CIRCLE -->
   <circle cx="16" cy="16" r="16" fill="#16a34a"/>
@@ -873,10 +1118,14 @@ transform:scale(.8);
  <span> WhatsApp </span>
   </a>
 
-  <a href="#contact"
-     class="ripple flex items-center justify-center px-5 h-11 bg-blue-600 text-white rounded-xl font-semibold shadow-md hover:shadow-xl transition">
-     Get Quote
-  </a>
+<a href="#contact"
+class="glass-btn glass-blue ripple flex items-center justify-center gap-2 px-5 h-11 bg-blue-600/80 text-white rounded-xl font-semibold">
+
+  <img src="images/get-quote.png" class="btn-icon">
+
+  <span>Get Quote</span>
+
+</a>
 
 </div>
  
@@ -891,7 +1140,7 @@ onclick="toggleMenu()"></div>
 <div id="mobileMenu"
 class="fixed right-3 top-3 bottom-3 h-auto
 w-[65%] max-w-[280px]
-bg-white/90 backdrop-blur-xl
+bg-white/60 backdrop-blur-2xl backdrop-blur-xl
 shadow-[0_20px_60px_rgba(0,0,0,0.18)]
 rounded-3xl
 z-50 px-6 pt-16 pb-8
@@ -930,12 +1179,17 @@ Home
 About
 </a>
 
-<a href="#products" onclick="toggleMenu()" class="menu-item">
-<svg class="menu-icon" fill="none" viewBox="0 0 24 24">
-<rect x="3" y="4" width="18" height="16" rx="2"/>
-<path d="M3 10h18"/>
-</svg>
-Products
+<a href="#showcase" onclick="toggleMenu()" class="menu-item">
+  <svg class="menu-icon" fill="none" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="18" height="16" rx="2"/>
+    <path d="M3 10h18"/>
+  </svg>
+  Products
+</a>
+
+<a href="#enquiry" onclick="toggleMenu()" class="menu-item">
+  <img src="images/nav-icons/phone.png" class="menu-icon" alt="">
+  Enquiry
 </a>
 
 <a href="#services" onclick="toggleMenu()" class="menu-item">
@@ -958,7 +1212,7 @@ Contact
 <div class="mt-8 flex flex-col gap-3 items-center">
 
 <a href="https://wa.me/919842217150"
-class="w-[88%] flex items-center justify-center gap-2 bg-green-500 text-white py-3 px-4 rounded-xl font-semibold shadow hover:shadow-lg transition active:scale-95">
+class="glass-btn glass-green ripple w-[88%] flex items-center justify-center gap-2 bg-green-500/80 py-3 px-4 rounded-xl font-semibold text-white transition active:scale-95">
 
   <img src="images/whatsapp.png" class="btn-icon">
 
@@ -967,7 +1221,7 @@ class="w-[88%] flex items-center justify-center gap-2 bg-green-500 text-white py
 
  
 <a href="#contact"
-class="w-[88%] flex items-center justify-center gap-3 bg-blue-600 text-white py-3 px-4 rounded-xl font-semibold shadow hover:shadow-lg transition active:scale-95 whitespace-nowrap">
+class="glass-btn glass-blue ripple w-[88%] flex items-center justify-center gap-3 bg-blue-600/80 py-3 px-4 rounded-xl font-semibold text-white transition active:scale-95 whitespace-nowrap">
 
 <img src="images/get-quote.png" class="btn-icon">
 
@@ -1028,37 +1282,40 @@ class="absolute inset-0 w-full h-full object-cover hidden md:block -z-20">
 Prime dealer of European open-end spares and authorized distributor of premium textile & industrial bearings. Your trusted partner for quality machinery solutions.
 </p>
 <!-- HERO BUTTONS -->
-<div class="flex gap-4 mt-8 flex-wrap justify-center md:justify-start">
+<div class="flex gap-4 mt-8 flex-wrap justify-center md:justify-start w-full max-w-xl">
 
   <!-- View Products -->
-  <a href="#products"
-     class="bg-white text-blue-700 px-6 py-3 rounded-xl font-semibold shadow hover:bg-blue-50 transition">
-    View Products →
+  <a href="#showcase"
+     class="glass-btn glass-white flex-1 min-w-[150px] flex items-center justify-center gap-2 h-12 text-glow-white font-semibold rounded-xl">
+    <span class="text-glow-white">View Products →</span>
   </a>
 
   <!-- Contact Us -->
   <a href="#contact"
-     class="bg-white/20 backdrop-blur-md text-white px-6 py-3 rounded-xl font-semibold border border-white/30 shadow-lg hover:bg-white/30 transition hover:scale-105">
-    Contact Us
+     class="glass-btn glass-blue flex-1 min-w-[150px] flex items-center justify-center gap-2 h-12 text-glow-blue font-semibold rounded-xl">
+
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        d="M3 5a2 2 0 012-2h3l2 5-2 1a11 11 0 005 5l1-2 5 2v3a2 2 0 01-2 2h-1C9.716 19 5 14.284 5 8V7a2 2 0 01-2-2z"/>
+    </svg>
+
+    <span class="text-glow-blue">Contact Us</span>
   </a>
 
-  <!-- WhatsApp Us -->
+  <!-- WhatsApp -->
   <a href="https://wa.me/919842217150"
-    class="bg-green-400/20 backdrop-blur-md text-white px-6 py-3 rounded-xl flex items-center gap-2 font-semibold border border-green-200/40 shadow-lg hover:bg-green-400/30 transition hover:scale-105">
+     class="glass-btn glass-green flex-1 min-w-[150px] flex items-center justify-center gap-2 h-12 text-glow-green font-semibold rounded-xl">
 
     <svg width="22" height="22" viewBox="0 0 32 32">
       <circle cx="16" cy="16" r="16" fill="#16a34a"/>
-      <path fill="#ffffff"
-        d="M16 6C10.48 6 6 10.03 6 15c0 2.01.71 3.86 1.9 5.34L6 26l5.9-1.88A10.3 10.3 0 0 0 16 25c5.52 0 10-4.03 10-9s-4.48-10-10-10z"/>
-      <path fill="#16a34a"
-        d="M19.7 17.3c-.2-.1-1.1-.5-1.3-.6-.2-.1-.4-.1-.6.1-.2.3-.6.6-.7.8-.2.2-.3.2-.5.1-.3-.1-1-.4-1.9-1.2-.7-.6-1.2-1.3-1.3-1.6-.1-.2 0-.4.1-.5.1-.1.3-.3.4-.4.1-.1.2-.2.2-.4.1-.2 0-.3 0-.4 0-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 2s.8 2.3.9 2.5c.1.2 1.8 2.8 4.3 3.9.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.4-.1 1.4-.6 1.6-1.2.2-.6.2-1.1.1-1.2 0-.1-.2-.2-.4-.3z"/>
+      <path fill="#ffffff" d="M16 6C10.48 6 6 10.03 6 15c0 2.01.71 3.86 1.9 5.34L6 26l5.9-1.88A10.3 10.3 0 0 0 16 25c5.52 0 10-4.03 10-9s-4.48-10-10-10z"/>
+      <path fill="#16a34a" d="M19.7 17.3c-.2-.1-1.1-.5-1.3-.6-.2-.1-.4-.1-.6.1-.2.3-.6.6-.7.8-.2.2-.3.2-.5.1-.3-.1-1-.4-1.9-1.2-.7-.6-1.2-1.3-1.3-1.6-.1-.2 0-.4.1-.5.1-.1.3-.3.4-.4.1-.1.2-.2.2-.4.1-.2 0-.3 0-.4 0-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 2s.8 2.3.9 2.5c.1.2 1.8 2.8 4.3 3.9.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.4-.1 1.4-.6 1.6-1.2.2-.6.2-1.1.1-1.2 0-.1-.2-.2-.4-.3z"/>
     </svg>
 
-    WhatsApp Us
+    <span class="text-glow-green">WhatsApp</span>
   </a>
 
 </div>
-
 </div>
 
 <div class="hidden md:grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 gap-8 md:gap-16 justify-items-center mt-14 md:mt-0">
@@ -1262,12 +1519,79 @@ a1.65 1.65 0 0 0-1.51 1z"/>
   </div>
 </section>
 
+
+<!-- PRODUCT SHOWCASE (NEW) -->
+<section id="showcase" class="bg-white py-16 overflow-hidden min-h-[400px]">
+
+  <div class="text-center mb-10">
+    <h2 class="text-3xl font-bold">Our Products</h2>
+    <p class="text-gray-500 mt-2">Explore our premium product range</p>
+  </div>
+
+  <!-- SCROLL CONTAINER -->
+<div class="relative">
+<div id="scrollContainer" class="w-full overflow-hidden">
+
+<div id="scrollTrack" class="flex gap-6 w-max">
+
+ </div>
+</div>
+
+  </div>
+
+
+  <!-- LEFT BUTTON -->
+<button onclick="scrollLeftBtn()" 
+class="absolute left-3 top-1/2 -translate-y-1/2 z-10 
+w-10 h-10 flex items-center justify-center
+rounded-full backdrop-blur-md bg-white/30 border border-white/40
+shadow-lg hover:scale-110 hover:bg-white/50 transition">
+
+  <svg xmlns="http://www.w3.org/2000/svg" 
+       class="w-5 h-5 text-gray-800" 
+       fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+  </svg>
+
+</button>
+
+<!-- RIGHT GLASS ARROW -->
+<button onclick="scrollRightBtn()" 
+class="absolute right-3 top-1/2 -translate-y-1/2 z-10 
+w-10 h-10 flex items-center justify-center
+rounded-full backdrop-blur-md bg-white/30 border border-white/40
+shadow-lg hover:scale-110 hover:bg-white/50 transition">
+
+  <svg xmlns="http://www.w3.org/2000/svg" 
+       class="w-5 h-5 text-gray-800" 
+       fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+  </svg>
+
+</button>
+</div>
+
+
+
+
+  <!-- EXPLORE BUTTON -->
+  <div class="text-center mt-10">
+    <button onclick="openGalleryModal()" class="glass-btn glass-blue bg-blue-600/80 text-white px-6 py-3 rounded-xl font-semibold">
+      Explore All →
+    </button> 
+  </div>
+
+</section>
+
+
+
 <!-- PRODUCTS -->
-<section id="products" class="bg-gray-50 py-16 sm:py-20 md:py-24">
-<h2 class="text-center text-3xl font-bold mb-10">Premium Textile Solutions</h2>
+<section id="enquiry" class="bg-gray-50 py-16 sm:py-20 md:py-24">
+<h2 class="text-center text-3xl font-bold mb-10">Send Your Enquiry</h2>
+<p class="text-center text-gray-500 mb-6">Select product category and send us your requirement</p>
 
 <p class="text-sm text-gray-400 text-center -mt-6 mb-8">
-Tap a card to explore products
+Choose a category and send enquiry instantly
 </p>
 
 <div class="flex justify-center gap-3 mb-10">
@@ -1298,7 +1622,7 @@ Tap a card to explore products
   <!-- BUTTONS -->
   <div class="flex flex-col sm:flex-row gap-4 justify-center items-center w-full max-w-sm">
     <a href="https://wa.me/919842217150"
-       class="ripple bg-green-500 text-white px-6 py-3 rounded-xl font-semibold transition hover:scale-105 w-full flex items-center justify-center gap-2">
+       class="glass-btn glass-green ripple bg-green-500/80 text-white px-6 py-3 rounded-xl font-semibold flex items-center justify-center gap-2">
 
       <svg width="22" height="22" viewBox="0 0 32 32" class="w-5 h-5 shrink-0">
        <circle cx="16" cy="16" r="16" fill="#16a34a"/>
@@ -1310,7 +1634,7 @@ Tap a card to explore products
     </a>
 
    <a href="#contact"
-   class="ripple bg-white text-blue-700 px-6 py-3 rounded-xl font-semibold shadow transition hover:scale-105 w-full text-center">
+   class="glass-btn glass-white ripple bg-white/80 text-blue-700 px-6 py-3 rounded-xl font-semibold">
   Send Enquiry
 </a>
   </div>
@@ -1723,38 +2047,38 @@ Ready to discuss your requirements? Reach out to us through any of these channel
 </div>
 
 <!-- RIGHT FORM -->
-<div class="bg-white p-6 sm:p-8 rounded-2xl shadow max-w-xl sm:max-w-2xl mx-auto">
+<div class="bg-white p-6 sm:p-8 rounded-2xl shadow w-full max-w-2xl mx-auto">
 
 <h3 class="text-2xl font-bold mb-6">Send us a Message</h3>
 
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+<div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-6 items-start w-full">
 
   <!-- FULL NAME -->
-  <div>
+  <div class="col-span-1 w-full">
     <label class="block text-sm font-semibold mb-1">Full Name</label>
    <input type="text" class="border border-gray-300 p-3 rounded-lg w-full focus:border-blue-500 focus:outline-none" id="name" placeholder="Your full name">
   </div>
 
   <!-- COMPANY -->
-  <div>
+  <div class="col-span-1 w-full">
     <label class="block text-sm font-semibold mb-1">Company Name</label>
     <input type="text" class="border border-gray-300 p-3 rounded-lg w-full focus:border-blue-500 focus:outline-none" id="company" placeholder="Your company name">
   </div>
 
   <!-- EMAIL -->
-  <div>
+  <div class="col-span-1 w-full">
     <label class="block text-sm font-semibold mb-1">Email Address</label>
     <input type="email" class="border border-gray-300 p-3 rounded-lg w-full focus:border-blue-500 focus:outline-none" id="email" placeholder="your@email.com">
   </div>
 
   <!-- PHONE -->
-  <div>
+  <div class="col-span-1 w-full">
     <label class="block text-sm font-semibold mb-1">Phone Number</label>
     <input type="tel" class="border border-gray-300 p-3 rounded-lg w-full focus:border-blue-500 focus:outline-none" id="phone" placeholder="+91 XXXXX XXXXX">
   </div>
 
   <!-- SUBJECT (FULL WIDTH) -->
-  <div class="md:col-span-2">
+  <div class="col-span-1 lg:col-span-2">
     <label class="block text-sm font-semibold mb-1">Subject</label>
     <select id="subject" class="border border-gray-300 p-3 rounded-lg w-full focus:border-blue-500 focus:outline-none">
       <option value="">Select a subject</option>
@@ -1767,37 +2091,38 @@ Ready to discuss your requirements? Reach out to us through any of these channel
   </div>
 
   <!-- MESSAGE (FULL WIDTH) -->
-  <div class="md:col-span-2">
+  <div class="col-span-1 lg:col-span-2">
     <label class="block text-sm font-semibold mb-1">Message</label>
     <textarea class="border border-gray-300 p-3 rounded-lg w-full focus:border-blue-500 focus:outline-none" id="message" rows="4"
       placeholder="Tell us about your requirements..."></textarea>
   </div>
 
-  <!-- BUTTONS (FULL WIDTH) -->
-  <div class="col-span-2 flex flex-col sm:flex-row gap-4">
+<div class="col-span-1 lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
 
-    <button
-      type="button"
-      onclick="sendWA()"
-      class="bg-blue-600 text-white px-6 py-3 rounded-lg w-full font-semibold shadow transition hover:scale-105">
-      Send Message
-    </button>
+  <!-- SEND MESSAGE (BLUE like Get Quote) -->
+<button
+  type="button"
+  onclick="sendWA()"
+  class="glass-btn glass-blue ripple w-full h-12 flex items-center justify-center rounded-xl bg-blue-600/80 text-white font-semibold">
+  Send Message
+</button>
 
-    <button
-      type="button"
-      onclick="sendWA()"
-      class="wa-btn bg-green-500 text-white px-6 py-3 rounded-lg w-full flex items-center justify-center gap-2 transition hover:scale-105">
+  <!-- WHATSAPP (GREEN like header) -->
+<button
+  type="button"
+  onclick="sendWA()"
+  class="glass-btn glass-green ripple w-full h-12 flex items-center justify-center rounded-xl bg-green-500/80 text-white font-semibold gap-2">
 
-      <svg width="22" height="22" class="shrink-0" viewBox="0 0 32 32">
-        <circle cx="16" cy="16" r="16" fill="#16a34a"/>
-        <path fill="#ffffff" d="M16 6C10.48 6 6 10.03 6 15c0 2.01.71 3.86 1.9 5.34L6 26l5.9-1.88A10.3 10.3 0 0 0 16 25c5.52 0 10-4.03 10-9s-4.48-10-10-10z"/>
-        <path fill="#16a34a" d="M19.7 17.3c-.2-.1-1.1-.5-1.3-.6-.2-.1-.4-.1-.6.1-.2.3-.6.6-.7.8-.2.2-.3.2-.5.1-.3-.1-1-.4-1.9-1.2-.7-.6-1.2-1.3-1.3-1.6-.1-.2 0-.4.1-.5.1-.1.3-.3.4-.4.1-.1.2-.2.2-.4.1-.2 0-.3 0-.4 0-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 2s.8 2.3.9 2.5c.1.2 1.8 2.8 4.3 3.9.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.4-.1 1.4-.6 1.6-1.2.2-.6.2-1.1.1-1.2 0-.1-.2-.2-.4-.3z"/>
-      </svg>
+  <svg width="20" height="20" class="shrink-0" viewBox="0 0 32 32">
+    <circle cx="16" cy="16" r="16" fill="#16a34a"/>
+    <path fill="#ffffff" d="M16 6C10.48 6 6 10.03 6 15c0 2.01.71 3.86 1.9 5.34L6 26l5.9-1.88A10.3 10.3 0 0 0 16 25c5.52 0 10-4.03 10-9s-4.48-10-10-10z"/>
+    <path fill="#16a34a" d="M19.7 17.3c-.2-.1-1.1-.5-1.3-.6-.2-.1-.4-.1-.6.1-.2.3-.6.6-.7.8-.2.2-.3.2-.5.1-.3-.1-1-.4-1.9-1.2-.7-.6-1.2-1.3-1.3-1.6-.1-.2 0-.4.1-.5.1-.1.3-.3.4-.4.1-.1.2-.2.2-.4.1-.2 0-.3 0-.4 0-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 2s.8 2.3.9 2.5c.1.2 1.8 2.8 4.3 3.9.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.4-.1 1.4-.6 1.6-1.2.2-.6.2-1.1.1-1.2 0-.1-.2-.2-.4-.3z"/>
+  </svg>
 
-      <span>Send via WhatsApp</span>
-    </button>
+  <span>Send via WhatsApp</span>
+</button>
 
-  </div>
+</div>
 
 </div>
 </div>
@@ -1828,7 +2153,8 @@ Ready to discuss your requirements? Reach out to us through any of these channel
       <h4 class="text-white mb-2 font-bold text-lg">Quick Links</h4>
       <a href="#home">Home</a><br>
       <a href="#about">About</a><br>
-      <a href="#products">Products</a><br>
+      <a href="#showcase">Products</a><br>
+      <a href="#enquiry">Enquiry</a><br>
       <a href="#services">Services</a><br>
       <a href="#contact">Contact</a>
     </div>
@@ -1992,23 +2318,25 @@ setTimeout(() => {
 
     box.innerHTML += `
       <div
-        class="stagger-item bg-white rounded-2xl shadow overflow-hidden relative group text-center cursor-pointer"
-        onclick="${
-          type === 'openend'
-            ? `openBrand('${item.name}')`
-            : type === 'ball'
-            ? `openBallMaterial('${item.name}')`
-            : type === 'other'
-            ? `openOtherMaterial('${item.name}')`
-            : ''
-        }">
+        class="stagger-item bg-white rounded-2xl shadow overflow-hidden relative group text-center"
+        
+	>
 
         <div class="relative">
 
           <img loading="lazy"
-            src="${item.img}"
-            alt="${item.name}"
-            class="w-full ${
+  src="${item.img}"
+  alt="${item.name}"
+  onclick="${
+    type === 'openend'
+      ? `openBrand('${item.name}')`
+      : type === 'ball'
+      ? `openBallMaterial('${item.name}')`
+      : type === 'other'
+      ? `openOtherMaterial('${item.name}')`
+      : ''
+  }"
+  class="cursor-pointer w-full ${
               type === 'ball' ? 'h-56 object-contain p-4' :
               type === 'other' ? 'h-48 object-contain p-4' :
               type === 'openend' ? 'h-48 object-contain p-4' :
@@ -2054,7 +2382,28 @@ setTimeout(() => {
 
         </div>
 
-        <h4 class="font-semibold text-lg py-4">${item.name}</h4>
+      <div class="p-4 flex flex-col">
+  <h4 class="font-semibold text-lg mb-2">${item.name}</h4>
+
+  ${
+    type !== "used"
+      ? `
+     <button 
+  onclick="event.stopPropagation(); openProduct('${item.name}', '${type}')"
+  class="ml-auto mt-2 flex items-center gap-1 text-blue-600 font-semibold text-sm hover:gap-2 transition-all duration-300">
+
+  Explore
+
+  <svg width="16" height="16" viewBox="0 0 24 24">
+    <path d="M5 12h14M13 5l7 7-7 7" stroke="#2563eb" stroke-width="2"/>
+  </svg>
+
+</button>
+      `
+      : ""
+  }
+
+</div>
 
       </div>
     `;
@@ -2073,6 +2422,8 @@ box.classList.remove("tab-fade-out");
 
 }, 200);
 }
+
+
 
 
 
@@ -3265,6 +3616,31 @@ link.classList.add("active");
 });
 });
 
+
+function sendEnquiry(productName){
+  const message = `Hello, I am interested in ${productName}. Please share details.`;
+  const phone = "919842217150";
+
+  const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+  window.open(url, "_blank");
+}
+
+function openProduct(name, type){
+
+  if(type === "openend"){
+    openBrand(name);
+  }
+  else if(type === "ball"){
+    openBallMaterial(name);
+  }
+  else if(type === "other"){
+    openOtherMaterial(name);
+  }
+
+}
+
+
+
 </script>
 
 <!-- SUCCESS POPUP -->
@@ -3412,7 +3788,7 @@ link.classList.add("active");
 </div>
 
 <button id="scrollTopBtn"
-class="fixed bottom-24 right-4 z-40 bg-blue-600 text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center opacity-0 pointer-events-none transition">
+class="glass-btn glass-blue fixed bottom-24 right-6 w-12 h-12 flex items-center justify-center rounded-full bg-blue-600/80 text-white z-50">
 
 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="3">
   <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
@@ -3447,6 +3823,45 @@ btn.onclick = () => window.scrollTo({top:0, behavior:"smooth"});
  
 
 <script>
+const productNames = [
+  "T100 Rotor Bearing",
+  "T010 Rotor Bearing",
+  "T090 Rotor Bearing",
+  "T085 Rotor Bearing",
+  "T086 Rotor Bearing",
+  "T088 Rotor Bearing",
+  "T004 Rotor Bearing",
+  "T013 Rotor Bearing",
+  "73-1-31 Rotor Bearing",
+  "73-1-22 Rotor Bearing",
+  "T34D/T090 Rotor Complete",
+  "T34DN/T100 Rotor Complete",
+  "T34DN/T010 Rotor Complete",
+  "T34D/T010K Rotor Complete",
+  "T34D/T090 Rotor Complete",
+  "U34Ni/T090 Rotor Complete",
+  "T34Ni/T088 Rotor Complete",
+  "U34Ni/T088 Rotor Complete",
+  "T34Ni/T085 Rotor Complete",
+  "U34Ni/T085 Rotor Complete",
+  "T34DN/73-1-31 Rotor Complete",
+  "T40DN/73-1-31 Rotor Complete",
+  "36MM/T085 Rotor Complete",
+  "C533 Tr-D/T013 Rotor Complete",
+  "C341 T-D/T013SL Rotor Complete",
+  "C533 U-D/T013 Rotor Complete",
+  "S536 U-D/72-11 Rotor Complete",
+  "43MM/73-1-31 Rotor Complete",
+  "54MM/73-1-22 Rotor Complete",
+  "66MM/T085 Rotor Complete",
+  "43MM/T085 Rotor Complete",
+  "43MM/T004 Rotor Complete",
+  "83-18-100 Resilient Mount",
+  "Opening Roller Heads (OK40NP, OS21DN, OK40DN, OS21DN)",
+  "Rotor Complete"
+];
+
+
 window.addEventListener("load",()=>{
 const loader = document.getElementById("loader");
 
@@ -3459,11 +3874,365 @@ if (loader) {
 })
 </script>
 
+<!-- GALLERY MODAL -->
+<div id="galleryModal"
+     onclick="if(event.target.id==='galleryModal') closeGalleryModal()"
+     class="fixed inset-0 bg-black/60 hidden flex items-center justify-center z-50">
+  <div class="bg-white rounded-2xl popup-anim w-[92%] md:w-[90%] max-w-md md:max-w-5xl h-[80vh] p-6 md:p-8 relative flex flex-col overflow-hidden">
+
+    <!-- CLOSE -->
+    <button onclick="closeGalleryModal()" class="absolute top-4 right-4 text-gray-500 text-2xl">×</button>
+
+    <h3 id="brandTitle" class="text-2xl font-bold mb-6 text-center"></h3>
+
+    <!-- PRODUCT GRID -->
+    <div class="flex-1 overflow-y-auto pr-2 brand-scroll max-h-full">
+    
+    <div id="galleryGrid" class="grid grid-cols-2 md:grid-cols-3 gap-6"></div>
+
+  </div>
+</div>
+</div>
+
+
+
+
+
+<!-- IMAGE MODAL -->
+<div id="imageModal"
+     onclick="closeImageModal()"
+     class="fixed inset-0 bg-black/80 hidden items-center justify-center z-50">
+
+  <!-- CLOSE BUTTON -->
+  <button onclick="closeImageModal()" 
+    class="absolute top-6 right-6 text-white text-3xl">&times;</button>
+
+  <!-- IMAGE -->
+  <img id="modalImg"
+     onclick="event.stopPropagation()"
+     class="max-w-[90%] max-h-[90%] rounded-xl shadow-lg object-contain">
+
+</div>
+
+
+
+<div id="productModal" onclick="closeModal()" class="fixed inset-0 bg-black/60 hidden items-center justify-center z-50">
+
+  <!-- CARD -->
+  <div onclick="event.stopPropagation()" class="bg-white rounded-2xl shadow-xl w-[90%] md:w-[70%] lg:w-[60%] max-w-4xl p-6 relative animate-pop">
+
+    <!-- CLOSE BUTTON -->
+    <button onclick="closeModal()" 
+      class="absolute top-3 right-3 text-xl font-bold text-gray-600 hover:text-black">
+      ✕
+    </button>
+
+    <!-- IMAGE -->
+    <img id="modalImg" class="w-full h-[300px] md:h-[400px] lg:h-[500px] object-contain rounded-lg mb-4">
+
+    <!-- TITLE -->
+    <h3 id="modalTitle" class="text-lg font-semibold text-center"></h3>
+
+  </div>
+
+</div>
+
+<script>
+function openImageModal(src) {
+  const modal = document.getElementById("imageModal");
+  const img = document.getElementById("modalImg");
+
+  img.src = src;
+  modal.classList.remove("hidden");
+  modal.classList.add("flex");
+}
+
+function closeImageModal() {
+  const modal = document.getElementById("imageModal");
+
+  modal.classList.remove("flex");
+  modal.classList.add("hidden");
+}
+
+
+let animationId;
+let currentScroll = 0;
+let isPaused = false;
+let scrollSpeed = 0.8;
+
+window.addEventListener("load", () => {
+
+  // duplicate AFTER full load
+  track.innerHTML += track.innerHTML;
+
+  // start from middle (fixes jump + lag)
+  currentScroll = track.scrollWidth / 2;
+  container.scrollLeft = currentScroll;
+
+  // start animation AFTER layout ready
+  animationId = requestAnimationFrame(autoScroll);
+
+});
+
+const container = document.getElementById("scrollContainer");
+const track = document.getElementById("scrollTrack");
+
+
+
+// AUTO SCROLL
+function autoScroll() {
+  if (!isPaused) {
+
+    container.scrollLeft += scrollSpeed;
+
+    // 🔁 LOOP FIX (CRITICAL)
+    if (container.scrollLeft >= track.scrollWidth / 2) {
+      container.scrollLeft -= track.scrollWidth / 2;
+    }
+
+    // 🔁 ALWAYS SYNC VALUE
+    currentScroll = container.scrollLeft;
+  }
+
+  animationId = requestAnimationFrame(autoScroll);
+}
+
+
+// HOVER
+container.addEventListener("mouseenter", () => {
+  isPaused = true;
+});
+
+container.addEventListener("mouseleave", () => {
+  isPaused = false;
+});
+
+// OPEN
+window.openCard = function(el) {
+  isPaused = true;
+  cancelAnimationFrame(animationId);
+
+currentScroll = container.scrollLeft;
+
+  container.style.scrollBehavior = "auto";
+
+  const imgSrc = el.src;
+  const title = el.dataset.title;
+
+  document.getElementById("modalImg").src = imgSrc;
+  document.getElementById("modalTitle").innerText = title;
+
+  const modal = document.getElementById("productModal");
+
+  modal.classList.remove("hidden");
+  modal.classList.add("flex");
+
+  document.body.style.overflow = "hidden";
+}
+
+// CLOSE
+window.closeModal = function() {
+  isPaused = false;
+
+  container.style.scrollBehavior = "auto";
+
+  const modal = document.getElementById("productModal");
+
+  modal.classList.add("hidden");
+  modal.classList.remove("flex");
+
+  document.body.style.overflow = "auto";
+
+  animationId = requestAnimationFrame(autoScroll);
+}
+
+function scrollLeftBtn() {
+  isPaused = true;
+
+  currentScroll -= 300;
+  if (currentScroll < 0) currentScroll = 0;
+
+  container.scrollTo({
+    left: currentScroll,
+    behavior: "smooth"
+  });
+
+  setTimeout(() => isPaused = false, 2000);
+}
+
+function scrollRightBtn() {
+  isPaused = true;
+
+  currentScroll += 300;
+
+  container.scrollTo({
+    left: currentScroll,
+    behavior: "smooth"
+  });
+
+  setTimeout(() => isPaused = false, 2000);
+}
+
+
+function sendWA(){
+
+  const name = document.getElementById("name").value;
+  const company = document.getElementById("company").value;
+  const email = document.getElementById("email").value;
+  const phone = document.getElementById("phone").value;
+  const subject = document.getElementById("subject").value;
+  const message = document.getElementById("message").value;
+
+  // ✅ format message
+  let text =
+`Hello, I have an enquiry:
+
+Name: ${name}
+Company: ${company}
+Email: ${email}
+Phone: ${phone}
+Subject: ${subject}
+
+Message:
+${message}`;
+
+  // encode for URL
+  let encodedText = encodeURIComponent(text);
+
+  // your WhatsApp number
+  let url = `https://wa.me/919842217150?text=${encodedText}`;
+
+  // open WhatsApp
+  window.open(url, "_blank");
+}
+
+function sendForm(){
+  sendWA(); // reuse same WhatsApp logic
+}
+
+function openImage(src){
+  document.getElementById("previewImg").src = src;
+  document.getElementById("imagePreview").classList.remove("hidden");
+}
+
+document.getElementById("imagePreview").onclick = function(){
+  this.classList.add("hidden");
+}
+
+window.onload = function(){
+
+  const gallery = document.getElementById("galleryContent");
+
+  for(let i = 1; i <= 33; i++){
+
+    gallery.innerHTML += `
+      <div class="bg-white rounded-xl p-4 shadow text-center cursor-pointer hover:shadow-lg transition">
+	
+        <!-- PLACEHOLDER IMAGE -->
+        <div class="w-full h-40 bg-gray-200 rounded-lg mb-3"></div>
+
+        <p class="text-sm font-medium">Product ${i}</p>
+
+      </div>
+    `;
+  }
+
+}
+
+
+function openGalleryModal(){
+
+
+  const grid = document.getElementById("galleryGrid");
+  grid.innerHTML = "";
+
+  for(let i = 1; i <= 35; i++){
+
+    grid.innerHTML += `
+      <div class="cursor-pointer border rounded-xl p-4 hover:shadow-lg transition text-center">
+
+        <img src="images/card/product${i}.jpg"
+             data-title="${productNames[i-1]}"
+             onclick="openCard(this)"
+             class="w-full h-28 sm:h-32 md:h-36 object-cover rounded-xl mb-3">
+
+        <p class="font-semibold">${productNames[i-1]}</p>
+
+      </div>
+    `;
+  }
+
+  document.getElementById("galleryModal").classList.remove("hidden");
+  document.body.classList.add("no-scroll");
+}
+
+function closeGalleryModal(){
+  document.getElementById("galleryModal").classList.add("hidden");
+  document.body.classList.remove("no-scroll");
+}
+
+
+
+
+const scrollTrack = document.getElementById("scrollTrack");
+
+scrollTrack.innerHTML = "";
+
+for(let i = 1; i <= 35; i++){
+  scrollTrack.innerHTML += `
+    <div class="min-w-[220px] flex-shrink-0 bg-white rounded-xl shadow p-4">
+      
+      <img src="images/card/product${i}.jpg"
+           data-title="${productNames[i-1]}"
+           onclick="openCard(this)"
+           class="cursor-pointer w-full h-40 object-cover rounded-lg mb-3">
+
+      <h4 class="text-sm font-semibold text-center">
+        ${productNames[i-1]}
+      </h4>
+
+    </div>
+  `;
+}
+
+</script>
+
+
+<div id="imagePreview"
+class="fixed inset-0 bg-black/80 flex items-center justify-center z-50 hidden">
+
+  <img id="previewImg" class="max-w-[90%] max-h-[90%] rounded-xl shadow-xl">
+
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  const scrollTrack = document.getElementById("scrollTrack");
+
+  for(let i = 1; i <= 35; i++){
+    scrollTrack.innerHTML += `
+      <div class="min-w-[220px] flex-shrink-0 bg-white rounded-xl shadow p-4">
+
+        <img src="images/card/product${i}.jpg"
+             data-title="${productNames[i-1]}"
+             onclick="openCard(this)"
+             class="cursor-pointer w-full h-40 object-cover rounded-lg mb-3">
+
+        <h4 class="text-sm font-semibold text-center">
+          ${productNames[i-1]}
+        </h4>
+
+      </div>
+    `;
+  }
+
+});
+</script>
 
 </body>
 
 </html>
-
 
 
 
