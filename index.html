@@ -427,6 +427,13 @@ header nav a {
   transition: transform 0.4s ease, filter 0.6s ease;
 }
 
+.product-card img {
+  width: 100%;
+  height: 180px;       /* fix height */
+  object-fit: contain; /* IMPORTANT */
+  background: white;   /* fills empty space */
+}
+
 .product-card:hover img {
   transform: scale(1.08);
 }
@@ -3908,7 +3915,7 @@ if (loader) {
     class="absolute top-6 right-6 text-white text-3xl">&times;</button>
 
   <!-- IMAGE -->
-  <img id="modalImg"
+  <img id="modalImgPreview"
      onclick="event.stopPropagation()"
      class="max-w-[90%] max-h-[90%] rounded-xl shadow-lg object-contain">
 
@@ -4115,9 +4122,7 @@ function openImage(src){
   document.getElementById("imagePreview").classList.remove("hidden");
 }
 
-document.getElementById("imagePreview").onclick = function(){
-  this.classList.add("hidden");
-}
+
 
 window.onload = function(){
 
@@ -4185,7 +4190,7 @@ for(let i = 1; i <= 35; i++){
       <img src="images/card/product${i}.jpg"
            data-title="${productNames[i-1]}"
            onclick="openCard(this)"
-           class="cursor-pointer w-full h-40 object-cover rounded-lg mb-3">
+           class="cursor-pointer w-full h-40 object-contain bg-white rounded-lg mb-3">
 
       <h4 class="text-sm font-semibold text-center">
         ${productNames[i-1]}
@@ -4195,15 +4200,26 @@ for(let i = 1; i <= 35; i++){
   `;
 }
 
+function openCard(el) {
+
+  const imgSrc = el.src;
+  const title = el.dataset.title;
+
+  document.getElementById("modalImg").src = imgSrc;
+  document.getElementById("modalTitle").innerText = title;
+
+  const modal = document.getElementById("productModal");
+
+  modal.classList.remove("hidden");
+  modal.classList.add("flex");
+
+  document.body.style.overflow = "hidden";
+}
+
 </script>
 
 
-<div id="imagePreview"
-class="fixed inset-0 bg-black/80 flex items-center justify-center z-50 hidden">
 
-  <img id="previewImg" class="max-w-[90%] max-h-[90%] rounded-xl shadow-xl">
-
-</div>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
