@@ -3918,6 +3918,21 @@ if (loader) {
 
 </div>
 
+ <!-- PREV -->
+  <button onclick="prevImage()" 
+    class="absolute left-5 top-1/2 -translate-y-1/2 text-white text-4xl z-50">
+    ❮
+  </button>
+
+  <!-- NEXT -->
+  <button onclick="nextImage()" 
+    class="absolute right-5 top-1/2 -translate-y-1/2 text-white text-4xl z-50">
+    ❯
+  </button>
+
+</div>
+
+
 </div>
 
 
@@ -3944,6 +3959,7 @@ if (loader) {
 </div>
 
 <script>
+
 function openImageModal(src) {
 
   const modal = document.getElementById("imageModal");
@@ -3972,6 +3988,8 @@ function closeImageModal() {
   img.style.transform = "translate(0,0) scale(1)";
 }
 
+let galleryImages = [];
+let currentIndex = 0;
 
 let animationId;
 let currentScroll = 0;
@@ -4169,7 +4187,7 @@ function openGalleryModal(){
 
         <img src="images/card/product${i}.jpg"
              data-title="${productNames[i-1]}"
-             onclick="openCard(this)"
+             onclick="openPreview(this)"
              class="w-full h-48 md:h-64 object-contain bg-white rounded-xl mb-3">
 
         <p class="font-semibold">${productNames[i-1]}</p>
@@ -4200,7 +4218,7 @@ for(let i = 1; i <= 35; i++){
       
       <img src="images/card/product${i}.jpg"
            data-title="${productNames[i-1]}"
-           onclick="openCard(this)"
+             onclick="openPreview(this)"
            class="cursor-pointer w-full h-40 object-contain bg-white rounded-lg mb-3">
 
       <h4 class="text-sm font-semibold text-center leading-tight whitespace-pre-line min-h-[40px]">
@@ -4243,7 +4261,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         <img src="images/card/product${i}.jpg"
              data-title="${productNames[i-1]}"
-             onclick="openCard(this)"
+             onclick="openPreview(this)"
              class="cursor-pointer w-full h-40 object-cover rounded-lg mb-3">
 
         <h4 class="text-sm font-semibold text-center leading-tight whitespace-pre-line min-h-[40px]">
@@ -4256,10 +4274,97 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
+let scale = 1;
+let currentX = 0;
+let currentY = 0;
 
+function initZoom() {
+  const img = document.getElementById("modalImgPreview");
 
+  img.onwheel = function(e) {
+    e.preventDefault();
 
+    const zoomSpeed = 0.1;
 
+    if (e.deltaY < 0) {
+      scale += zoomSpeed;
+    } else {
+      scale -= zoomSpeed;
+    }
+
+    // 🔥 NO LIMIT (only prevent negative)
+    if (scale < 0.5) scale = 0.5;
+
+    img.style.transform = `translate(${currentX}px, ${currentY}px) scale(${scale})`;
+  };
+
+  // DRAG
+  let isDragging = false;
+  let startX, startY;
+
+  img.onmousedown = function(e) {
+    isDragging = true;
+    startX = e.clientX - currentX;
+    startY = e.clientY - currentY;
+  };
+
+  window.onmousemove = function(e) {
+    if (!isDragging) return;
+
+    currentX = e.clientX - startX;
+    currentY = e.clientY - startY;
+
+    img.style.transform = `translate(${currentX}px, ${currentY}px) scale(${scale})`;
+  };
+
+  window.onmouseup = function() {
+    isDragging = false;
+  };
+}
+
+function openPreview(el){
+
+  const images = document.querySelectorAll('[onclick="openPreview(this)"]');
+
+  galleryImages = Array.from(images);
+
+  currentIndex = galleryImages.indexOf(el);
+
+  showPreviewImage();
+}
+
+function showPreviewImage(){
+
+  const modal = document.getElementById("imageModal");
+  const img = document.getElementById("modalImgPreview");
+
+  img.src = galleryImages[currentIndex].src;
+
+  modal.classList.remove("hidden");
+  modal.classList.add("flex");
+
+  setTimeout(initZoom, 100);
+}
+
+function nextImage(){
+  currentIndex++;
+
+  if(currentIndex >= galleryImages.length){
+    currentIndex = 0;
+  }
+
+  showPreviewImage();
+}
+
+function prevImage(){
+  currentIndex--;
+
+  if(currentIndex < 0){
+    currentIndex = galleryImages.length - 1;
+  }
+
+  showPreviewImage();
+}
 
 </script>
 
