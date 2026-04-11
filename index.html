@@ -1069,14 +1069,6 @@ body.no-scroll {
   scroll-margin-top: 120px;
 }
 
-#modalImgPreview {
-  cursor: grab;
-  transition: transform 0.05s ease;
-}
-
-#modalImgPreview:active {
-  cursor: grabbing;
-}
 
 </style>
 </head>
@@ -3918,11 +3910,11 @@ if (loader) {
     class="absolute top-6 right-6 text-white text-3xl">&times;</button>
 
   <!-- IMAGE -->
-  <div class="w-full h-full flex items-center justify-center">
+  <div class="overflow-hidden w-full h-full flex items-center justify-center">
 
-<img id="modalImgPreview"
-     onclick="event.stopPropagation();"
-       class="max-w-[90%] max-h-[90%] rounded-xl shadow-lg object-contain transition-transform duration-200 cursor-grab">
+  <img id="modalImgPreview"
+       onclick="event.stopPropagation()"
+       class="max-w-[90%] max-h-[90%] rounded-xl shadow-lg object-contain transition-transform duration-200 cursor-zoom-in">
 
 </div>
 
@@ -3952,8 +3944,33 @@ if (loader) {
 </div>
 
 <script>
+function openImageModal(src) {
 
+  const modal = document.getElementById("imageModal");
+  const img = document.getElementById("modalImgPreview");
 
+  img.src = src;
+
+  modal.classList.remove("hidden");
+  modal.classList.add("flex");
+
+  setTimeout(initZoom, 100); // 🔥 IMPORTANT
+}
+
+function closeImageModal() {
+
+  const modal = document.getElementById("imageModal");
+  const img = document.getElementById("modalImgPreview");
+
+  modal.classList.remove("flex");
+  modal.classList.add("hidden");
+
+  scale = 1;
+  currentX = 0;
+  currentY = 0;
+
+  img.style.transform = "translate(0,0) scale(1)";
+}
 
 
 let animationId;
@@ -3963,19 +3980,17 @@ let scrollSpeed = 0.8;
 
 window.addEventListener("load", () => {
 
-  const track = document.getElementById("scrollTrack");
-  const container = document.getElementById("scrollContainer");
-
   // duplicate AFTER full load
   track.innerHTML += track.innerHTML;
 
+  // start from middle (fixes jump + lag)
   currentScroll = track.scrollWidth / 2;
   container.scrollLeft = currentScroll;
 
+  // start animation AFTER layout ready
   animationId = requestAnimationFrame(autoScroll);
 
 });
-
 
 const container = document.getElementById("scrollContainer");
 const track = document.getElementById("scrollTrack");
@@ -4120,7 +4135,7 @@ function openImage(src){
 
 
 
-window.addEventListener("load", function(){
+window.onload = function(){
 
   const gallery = document.getElementById("galleryContent");
 
@@ -4154,7 +4169,7 @@ function openGalleryModal(){
 
         <img src="images/card/product${i}.jpg"
              data-title="${productNames[i-1]}"
-             onclick="openImageModal(this.src)"
+             onclick="openCard(this)"
              class="w-full h-48 md:h-64 object-contain bg-white rounded-xl mb-3">
 
         <p class="font-semibold">${productNames[i-1]}</p>
@@ -4174,6 +4189,27 @@ function closeGalleryModal(){
 
 
 
+
+const scrollTrack = document.getElementById("scrollTrack");
+
+scrollTrack.innerHTML = "";
+
+for(let i = 1; i <= 35; i++){
+  scrollTrack.innerHTML += `
+    <div class="min-w-[220px] flex-shrink-0 bg-white rounded-xl shadow p-4">
+      
+      <img src="images/card/product${i}.jpg"
+           data-title="${productNames[i-1]}"
+           onclick="openCard(this)"
+           class="cursor-pointer w-full h-40 object-contain bg-white rounded-lg mb-3">
+
+      <h4 class="text-sm font-semibold text-center leading-tight whitespace-pre-line min-h-[40px]">
+  ${productNames[i-1]}
+</h4>
+
+    </div>
+  `;
+}
 
 function openCard(el) {
 
@@ -4207,7 +4243,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         <img src="images/card/product${i}.jpg"
              data-title="${productNames[i-1]}"
-             onclick="openImageModal(this.src)"
+             onclick="openCard(this)"
              class="cursor-pointer w-full h-40 object-cover rounded-lg mb-3">
 
         <h4 class="text-sm font-semibold text-center leading-tight whitespace-pre-line min-h-[40px]">
@@ -4221,113 +4257,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-let scale = 1;
-let posX = 0;
-let posY = 0;
-let isDragging = false;
-let startX, startY;
 
-function openImageModal(src) {
-
-  const modal = document.getElementById("imageModal");
-  const img = document.getElementById("modalImgPreview");
-
-  img.src = src;
-
-  modal.classList.remove("hidden");
-  modal.classList.add("flex");
-
-  // reset
-  scale = 1;
-  posX = 0;
-  posY = 0;
-  updateTransform();
-
-  setupZoom(img);
-}
-
-function setupZoom(img) {
-
-  // scroll zoom
-  img.onwheel = (e) => {
-    e.preventDefault();
-
-    scale += e.deltaY < 0 ? 0.2 : -0.2;
-    scale = Math.max(1, Math.min(scale, 5));
-
-    updateTransform();
-  };
-
-  // drag
-  img.onmousedown = (e) => {
-    isDragging = true;
-    startX = e.clientX - posX;
-    startY = e.clientY - posY;
-  };
-
-  window.onmousemove = (e) => {
-    if (!isDragging) return;
-
-    posX = e.clientX - startX;
-    posY = e.clientY - startY;
-
-    updateTransform();
-  };
-
-  window.onmouseup = () => {
-    isDragging = false;
-  };
-
-  // mobile pinch
-  let initialDistance = 0;
-
-  img.ontouchstart = (e) => {
-    if (e.touches.length === 2) {
-      initialDistance = getDistance(e.touches);
-    }
-  };
-
-  img.ontouchmove = (e) => {
-  e.preventDefault(); // 🔥 IMPORTANT
-    if (e.touches.length === 2) {
-
-      let newDistance = getDistance(e.touches);
-
-      if (initialDistance) {
-        scale += (newDistance - initialDistance) * 0.005;
-        scale = Math.max(1, Math.min(scale, 5));
-        updateTransform();
-      }
-
-      initialDistance = newDistance;
-    }
-  };
-}
-
-function updateTransform() {
-  const img = document.getElementById("modalImgPreview");
-  img.style.transform = `translate(${posX}px, ${posY}px) scale(${scale})`;
-}
-
-function getDistance(touches) {
-  let dx = touches[0].clientX - touches[1].clientX;
-  let dy = touches[0].clientY - touches[1].clientY;
-  return Math.sqrt(dx * dx + dy * dy);
-}
-
-function closeImageModal() {
-
-  const modal = document.getElementById("imageModal");
-  const img = document.getElementById("modalImgPreview");
-
-  modal.classList.remove("flex");
-  modal.classList.add("hidden");
-
-  scale = 1;
-  posX = 0;
-  posY = 0;
-  img.style.transform = "translate(0,0) scale(1)";
-}
 
 
 
