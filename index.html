@@ -4169,7 +4169,7 @@ function openGalleryModal(){
 
         <img src="images/card/product${i}.jpg"
              data-title="${productNames[i-1]}"
-             onclick="openCard(this)"
+             onclick="openImageModal(this.src)"
              class="w-full h-48 md:h-64 object-contain bg-white rounded-xl mb-3">
 
         <p class="font-semibold">${productNames[i-1]}</p>
@@ -4200,12 +4200,12 @@ for(let i = 1; i <= 35; i++){
       
       <img src="images/card/product${i}.jpg"
            data-title="${productNames[i-1]}"
-           onclick="openCard(this)"
+           onclick="openImageModal(this.src)"
            class="cursor-pointer w-full h-40 object-contain bg-white rounded-lg mb-3">
 
-      <h4 class="text-sm font-semibold text-center leading-tight whitespace-pre-line h-[40px] overflow-hidden">
-        ${productNames[i-1]}
-      </h4>
+      <h4 class="text-sm font-semibold text-center leading-tight whitespace-pre-line min-h-[40px]">
+  ${productNames[i-1]}
+</h4>
 
     </div>
   `;
@@ -4243,12 +4243,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         <img src="images/card/product${i}.jpg"
              data-title="${productNames[i-1]}"
-             onclick="openCard(this)"
+             onclick="openImageModal(this.src)"
              class="cursor-pointer w-full h-40 object-cover rounded-lg mb-3">
 
-        <h4 class="text-sm font-semibold text-center leading-tight whitespace-pre-line h-[40px] overflow-hidden">
-          ${productNames[i-1]}
-        </h4>
+        <h4 class="text-sm font-semibold text-center leading-tight whitespace-pre-line min-h-[40px]">
+  ${productNames[i-1]}
+</h4>
 
       </div>
     `;
@@ -4256,139 +4256,65 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
+
 let scale = 1;
+let posX = 0;
+let posY = 0;
 let isDragging = false;
 let startX, startY;
-let currentX = 0, currentY = 0;
 
-const img = document.getElementById("modalImgPreview");
+function openImageModal(src) {
 
-// SCROLL ZOOM (desktop)
-img.addEventListener("wheel", (e) => {
-  e.preventDefault();
-
-  if (e.deltaY < 0) {
-    scale += 0.2;
-  } else {
-    scale -= 0.2;
-  }
-
-  scale = Math.min(Math.max(1, scale), 5);
-
-  updateTransform();
-});
-
-// DRAG MOVE
-img.addEventListener("mousedown", (e) => {
-  isDragging = true;
-  startX = e.clientX - currentX;
-  startY = e.clientY - currentY;
-  img.style.cursor = "grabbing";
-});
-
-window.addEventListener("mousemove", (e) => {
-  if (!isDragging) return;
-
-  currentX = e.clientX - startX;
-  currentY = e.clientY - startY;
-
-  updateTransform();
-});
-
-window.addEventListener("mouseup", () => {
-  isDragging = false;
-  img.style.cursor = "zoom-in";
-});
-
-// TOUCH PINCH ZOOM (mobile)
-let initialDistance = 0;
-
-img.addEventListener("touchstart", (e) => {
-  if (e.touches.length === 2) {
-    initialDistance = getDistance(e.touches);
-  }
-});
-
-img.addEventListener("touchmove", (e) => {
-  if (e.touches.length === 2) {
-    let newDistance = getDistance(e.touches);
-
-    if (initialDistance) {
-      scale += (newDistance - initialDistance) * 0.005;
-      scale = Math.min(Math.max(1, scale), 5);
-      updateTransform();
-    }
-
-    initialDistance = newDistance;
-  }
-});
-
-function getDistance(touches) {
-  let dx = touches[0].clientX - touches[1].clientX;
-  let dy = touches[0].clientY - touches[1].clientY;
-  return Math.sqrt(dx * dx + dy * dy);
-}
-
-function updateTransform() {
-  img.style.transform = `translate(${currentX}px, ${currentY}px) scale(${scale})`;
-}
-
-// RESET WHEN CLOSED
-function closeImageModal() {
   const modal = document.getElementById("imageModal");
-
-  modal.classList.remove("flex");
-  modal.classList.add("hidden");
-
-  scale = 1;
-  currentX = 0;
-  currentY = 0;
-  img.style.transform = "translate(0,0) scale(1)";
-}
-
-let scale = 1;
-let currentX = 0;
-let currentY = 0;
-let isDragging = false;
-let startX, startY;
-
-function initZoom() {
-
   const img = document.getElementById("modalImgPreview");
 
-  if (!img) return;
+  img.src = src;
 
-  // SCROLL ZOOM
+  modal.classList.remove("hidden");
+  modal.classList.add("flex");
+
+  // reset
+  scale = 1;
+  posX = 0;
+  posY = 0;
+  updateTransform();
+
+  setupZoom(img);
+}
+
+function setupZoom(img) {
+
+  // scroll zoom
   img.onwheel = (e) => {
     e.preventDefault();
 
     scale += e.deltaY < 0 ? 0.2 : -0.2;
-    scale = Math.min(Math.max(1, scale), 5);
+    scale = Math.max(1, Math.min(scale, 5));
 
-    updateTransform(img);
+    updateTransform();
   };
 
-  // DRAG
+  // drag
   img.onmousedown = (e) => {
     isDragging = true;
-    startX = e.clientX - currentX;
-    startY = e.clientY - currentY;
+    startX = e.clientX - posX;
+    startY = e.clientY - posY;
   };
 
   window.onmousemove = (e) => {
     if (!isDragging) return;
 
-    currentX = e.clientX - startX;
-    currentY = e.clientY - startY;
+    posX = e.clientX - startX;
+    posY = e.clientY - startY;
 
-    updateTransform(img);
+    updateTransform();
   };
 
   window.onmouseup = () => {
     isDragging = false;
   };
 
-  // TOUCH PINCH
+  // mobile pinch
   let initialDistance = 0;
 
   img.ontouchstart = (e) => {
@@ -4399,20 +4325,23 @@ function initZoom() {
 
   img.ontouchmove = (e) => {
     if (e.touches.length === 2) {
+
       let newDistance = getDistance(e.touches);
 
-      scale += (newDistance - initialDistance) * 0.005;
-      scale = Math.min(Math.max(1, scale), 5);
-
-      updateTransform(img);
+      if (initialDistance) {
+        scale += (newDistance - initialDistance) * 0.005;
+        scale = Math.max(1, Math.min(scale, 5));
+        updateTransform();
+      }
 
       initialDistance = newDistance;
     }
   };
 }
 
-function updateTransform(img) {
-  img.style.transform = `translate(${currentX}px, ${currentY}px) scale(${scale})`;
+function updateTransform() {
+  const img = document.getElementById("modalImgPreview");
+  img.style.transform = `translate(${posX}px, ${posY}px) scale(${scale})`;
 }
 
 function getDistance(touches) {
@@ -4421,47 +4350,24 @@ function getDistance(touches) {
   return Math.sqrt(dx * dx + dy * dy);
 }
 
+function closeImageModal() {
+
+  const modal = document.getElementById("imageModal");
+  const img = document.getElementById("modalImgPreview");
+
+  modal.classList.remove("flex");
+  modal.classList.add("hidden");
+
+  scale = 1;
+  posX = 0;
+  posY = 0;
+  img.style.transform = "translate(0,0) scale(1)";
+}
+
+
+
 </script>
 
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
