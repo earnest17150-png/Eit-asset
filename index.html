@@ -3918,7 +3918,7 @@ if (loader) {
 
 <img id="modalImgPreview"
      onclick="event.stopPropagation();"
-       class="max-w-[90%] max-h-[90%] rounded-xl shadow-lg object-contain transition-transform duration-200 cursor-zoom-in">
+       class="max-w-[90%] max-h-[90%] rounded-xl shadow-lg object-contain transition-transform duration-200 cursor-grab">
 
 </div>
 
@@ -3948,18 +3948,6 @@ if (loader) {
 </div>
 
 <script>
-function openImageModal(src) {
-
-  const modal = document.getElementById("imageModal");
-  const img = document.getElementById("modalImgPreview");
-
-  img.src = src;
-
-  modal.classList.remove("hidden");
-  modal.classList.add("flex");
-
-  setTimeout(initZoom, 100); // 🔥 IMPORTANT
-}
 
 function closeImageModal() {
 
@@ -4289,7 +4277,7 @@ function openImageModal(src) {
 function setupZoom(img) {
 
   // scroll zoom
-  img.addEventListener("wheel", (e) => {
+  img.onwheel = (e) => {
     e.preventDefault();
 
     scale += e.deltaY < 0 ? 0.2 : -0.2;
